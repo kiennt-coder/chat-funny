@@ -1,0 +1,160 @@
+GET http://localhost:3001/
+
+### Get users list
+
+GET http://localhost:3001/v1/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODYxNTQwNDYsImV4cCI6MTY4NjE1NDM0Nn0.2cEX2PvswchNTQykpHrIj0G0TVkJqaCwPpBdsNxQrE4
+
+### Register account
+
+POST http://localhost:3001/v1/users/register
+Content-Type: application/json
+
+{
+    "username": "kiennt",
+    "password": "kmnkmn123"
+}
+### Refresh token
+
+POST http://localhost:3001/v1/users/refresh-token
+Content-Type: application/json
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDAyM2NiOTNhNzUyYWIwNDJkZWExODAiLCJpYXQiOjE2NzgxMjYwMzcsImV4cCI6MTcwOTY4MzYzN30.PH9JAi1q0ZtDcWF7hbXfi_uhTRDabhaA9Q0NkGbFNqk"
+}
+
+### Login
+
+POST http://localhost:3001/v1/users/login
+Content-Type: application/json
+
+{
+    "username": "kiennt",
+    "password": "kmnkmn123"
+}
+
+### Update
+
+PATCH http://localhost:3001/v1/users/6480ab1ed065370c33f9750c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODYxNTQzNzcsImV4cCI6MTY4NjE1NDY3N30.CSxNbDcw2iulCy_Pnk6nyWRBbmb769MRX7LP21Y4a9w
+Content-Type: application/json
+
+{
+    "nickname": "Ngô Trung Kiên",
+    "rooms": ["6480ab72d065370c33f97510"]
+}
+
+### Logout
+
+POST http://localhost:3001/v1/users/logout
+Content-Type: application/json
+
+{
+    "refreshToken": "bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkNDU5MGEwZDZkYzdmYmM5MzhiZWIiLCJpYXQiOjE2ODU5NDY5NTcsImV4cCI6MTcxNzUwNDU1N30.3cCChxCu4ninJsD5sWZ-DibTJjLlhmp3kBVPGO4vK1o"
+}
+
+
+#------------------------- Room --------------------------#
+### Create
+
+POST http://localhost:3001/v1/rooms
+Content-Type: application/json
+
+{
+  "type": 0,
+  "users": []
+}
+
+### Update
+PATCH http://localhost:3001/v1/rooms/6480ab72d065370c33f97510
+Content-Type: application/json
+
+{
+  "avatar": "https://kiennt.ga",
+  "name": "update group",
+  "type": 1,
+  "users": ["6480ab1ed065370c33f9750c"]
+}
+
+### Delete
+DELETE http://localhost:3001/v1/rooms/647d85c2ed5e7c2ed37673e8
+Content-Type: application/json
+
+### Get list
+GET http://localhost:3001/v1/rooms
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkODViNGVkNWU3YzJlZDM3NjczZTYiLCJpYXQiOjE2ODYwNjkwNzQsImV4cCI6MTY4NjA2OTM3NH0.M85Q8KrEIEPxyn7Vh_dxtI4iX2pvqScRNoZ_y1_UWKc
+
+### Get list message in room
+GET http://localhost:3001/v1/rooms/6480ab72d065370c33f97510/messages
+
+### Get detail
+GET http://localhost:3001/v1/rooms/6480ab72d065370c33f97510
+
+#------------------------- Message --------------------------#
+### Create
+
+POST http://localhost:3001/v1/messages
+Content-Type: application/json
+
+{
+  "roomId": "6480ab72d065370c33f97510",
+  "userSendId": "647f891534103cb8cc779018",
+  "userReveiceId": "647f891534103cb8cc779018",
+  "text": "Hello, World!",
+  "files": [],
+  "isSeen": ["647f891534103cb8cc779018"]
+}
+
+### Update
+PATCH http://localhost:3001/v1/messages/6480d53027bd179f318dc483
+Content-Type: application/json
+
+{
+  "files": ["648200e56bde84483c306781"],
+  "text": "update text"
+}
+
+### Delete
+DELETE http://localhost:3001/v1/messages/6480b2fc3d2e7664ea8086f4
+Content-Type: application/json
+
+### Get list
+GET http://localhost:3001/v1/messages
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkODViNGVkNWU3YzJlZDM3NjczZTYiLCJpYXQiOjE2ODYwNjkwNzQsImV4cCI6MTY4NjA2OTM3NH0.M85Q8KrEIEPxyn7Vh_dxtI4iX2pvqScRNoZ_y1_UWKc
+
+
+### Get detail
+GET http://localhost:3001/v1/messages/6480b2fc3d2e7664ea8086f4
+
+#------------------------- File --------------------------#
+### Create
+
+POST http://localhost:3001/v1/files
+Content-Type: application/json
+
+{
+  "name": "file",
+  "url": "https://kiennt.ga",
+  "messageId": "6480d53027bd179f318dc483"
+}
+
+### Update
+PATCH http://localhost:3001/v1/files/6481ffaf6bde84483c306773
+Content-Type: application/json
+
+{
+  "url": "https://kiennt.ga",
+  "messageId": "6480d53027bd179f318dc483"
+}
+
+### Delete
+DELETE http://localhost:3001/v1/files/6481ffaf6bde84483c306773
+Content-Type: application/json
+
+### Get list
+GET http://localhost:3001/v1/files
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkODViNGVkNWU3YzJlZDM3NjczZTYiLCJpYXQiOjE2ODYwNjkwNzQsImV4cCI6MTY4NjA2OTM3NH0.M85Q8KrEIEPxyn7Vh_dxtI4iX2pvqScRNoZ_y1_UWKc
+
+
+### Get detail
+GET http://localhost:3001/v1/files/6481ffaf6bde84483c306773
