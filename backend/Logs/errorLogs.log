@@ -1,0 +1,35 @@
+07-06-2023	22:54:03-----/v1/rooms/647d85c2ed5e7c2ed37673e8---GET---500---Cannot find by id!
+07-06-2023	23:08:42-----/v1/rooms/647f89acf644e776e0e50597---PATCH---500---Update failed!
+07-06-2023	23:08:49-----/v1/rooms/647d85c2ed5e7c2ed37673e8---DELETE---500---Not find with id!
+07-06-2023	23:09:21-----/v1/rooms/647f89acf644e776e0e50597---GET---500---Cannot find by id!
+07-06-2023	23:09:29-----/v1/rooms/647d85c2ed5e7c2ed37673e8---GET---500---Cannot find by id!
+07-06-2023	23:12:53-----/v1/users/6480ab1ed065370c33f9750c---PATCH---401---jwt expired
+07-06-2023	23:34:21-----/v1/messages---POST---undefined---joi is not defined
+07-06-2023	23:34:43-----/v1/messages---POST---500---Validate faild!
+07-06-2023	23:34:47-----/v1/messages---POST---500---Validate faild!
+07-06-2023	23:39:24-----/v1/messages---POST---undefined---Joi.string(...).unique is not a function
+07-06-2023	23:40:13-----/v1/messages---POST---500---Validate faild!
+07-06-2023	23:40:15-----/v1/messages---POST---500---Validate faild!
+08-06-2023	01:45:30-----/v1/messages/6480b2fc3d2e7664ea8086f4---PATCH---400---Unexpected token } in JSON at position 51
+08-06-2023	01:45:35-----/v1/messages/6480b2fc3d2e7664ea8086f4---PATCH---500---Validate failed!
+08-06-2023	01:46:13-----/v1/messages/6480b2fc3d2e7664ea8086f4---PATCH---500---Validate failed!
+08-06-2023	01:46:34-----/v1/messages/6480b2fc3d2e7664ea8086f4---PATCH---500---Validate failed!
+08-06-2023	01:46:35-----/v1/messages/6480b2fc3d2e7664ea8086f4---PATCH---500---Validate failed!
+08-06-2023	01:47:25-----/v1/messages---GET---undefined---Schema hasn't been registered for model "File".
+Use mongoose.model(name, schema)
+08-06-2023	01:47:48-----/v1/messages/6480ab72d065370c33f97510---GET---500---Cannot find by id!
+08-06-2023	01:47:59-----/v1/messages/6480b2fc3d2e7664ea8086f4---GET---undefined---Schema hasn't been registered for model "File".
+Use mongoose.model(name, schema)
+08-06-2023	01:49:43-----/v1/messages/6480b2fc3d2e7664ea8086f4---DELETE---500---Not find with id!
+08-06-2023	01:49:46-----/v1/messages/6480b2fc3d2e7664ea8086f4---GET---500---Cannot find by id!
+08-06-2023	02:05:55-----/v1/messages/6480b2fc3d2e7664ea8086f4---GET---500---Cannot find by id!
+08-06-2023	23:19:42-----/v1/files---POST---400---Unexpected token } in JSON at position 97
+08-06-2023	23:19:51-----/v1/files---POST---500---Validate faild!
+08-06-2023	23:20:33-----/v1/files/6480b2fc3d2e7664ea8086f4---PATCH---500---Validate failed!
+08-06-2023	23:21:55-----/v1/files/6480b2fc3d2e7664ea8086f4---PATCH---500---Update failed!
+08-06-2023	23:21:59-----/v1/files/6480b2fc3d2e7664ea8086f4---PATCH---500---Update failed!
+08-06-2023	23:23:04-----/v1/files/6480b2fc3d2e7664ea8086f4---PATCH---500---Update failed!
+08-06-2023	23:24:08-----/v1/files/6480b2fc3d2e7664ea8086f4---DELETE---500---Not find with id!
+08-06-2023	23:25:33-----/v1/messages/6480b2fc3d2e7664ea8086f4---PATCH---500---Validate failed!
+08-06-2023	23:25:58-----/v1/messages/6480d53027bd179f318dc483---PATCH---500---Validate failed!
+08-06-2023	23:26:05-----/v1/messages/6480d53027bd179f318dc483---PATCH---500---Validate failed!
