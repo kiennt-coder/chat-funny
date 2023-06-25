@@ -24,14 +24,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // log all requests to access.log
-app.use(
-    morgan("common", {
-        stream: fs.createWriteStream(
-            path.join(__dirname, "./Logs/access.log"),
-            { flags: "a" }
-        ),
-    })
-);
+// app.use(
+//     morgan("common", {
+//         stream: fs.createWriteStream(
+//             path.join(__dirname, "./Logs/access.log"),
+//             { flags: "a" }
+//         ),
+//     })
+// );
 
 // Create route home
 app.use("/v1/users", userRoute);
