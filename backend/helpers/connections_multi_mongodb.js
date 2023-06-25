@@ -1,39 +1,41 @@
-const mongoose = require('mongoose')
+const mongoose = require("mongoose");
 
 function newConnection(uri) {
     // Connect to MongoDB
-    const conn = mongoose.createConnection(process.env.URI_MONGODB, {
+    const conn = mongoose.createConnection(uri, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    })
+    });
 
     // Listen connected event
-    conn.on('connected', function() {
-        console.log(`Mongodb:: connected::${this.name}`)
-    })
+    conn.on("connected", function () {
+        console.log(`Mongodb:: connected::${this.name}`);
+    });
 
     // Listen disconnect event
-    conn.on('disconnected', function() {
-        console.log(`Mongodb:: disconnected::${this.name}`)
-    })
+    conn.on("disconnected", function () {
+        console.log(`Mongodb:: disconnected::${this.name}`);
+    });
 
     // Listen error event
-    conn.on('error', function(error) {
-        console.log(`Mongodb:: error::${JSON.stringify(error)}`)
-    })
+    conn.on("error", function (error) {
+        console.log(`Mongodb:: error::${JSON.stringify(error)}`);
+    });
 
     // Listen before close process event
-    process.on('SIGINT', async() => {
+    process.on("SIGINT", async () => {
         // Close connect to db
-        await conn.close()
-        process.exit(0)
-    })
+        await conn.close();
+        process.exit(0);
+    });
 
-    return conn
+    return conn;
 }
 
-const testConnection = newConnection(process.env.URI_MONGODB)
+const testConnection = newConnection(
+    "mongodb+srv://kiennt:Kmnkmn123%40@cluster0.fbj7hce.mongodb.net/?retryWrites=true&w=majority"
+);
 
 module.exports = {
-    testConnection
-}
+    testConnection,
+};
