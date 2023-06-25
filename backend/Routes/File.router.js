@@ -10,18 +10,18 @@ const {
 } = require("../Controllers/File.controller");
 
 // Get list file route
-route.get("/", getList);
+route.get("/", verifyAccessToken, getList);
 
 // Create file route
-route.post("/", create);
+route.post("/", verifyAccessToken, create);
 
 // Update file route
-route.patch("/:id", update);
+route.patch("/:id", verifyAccessToken, update);
 
 // Detail file route
-route.get("/:id", getDetail);
+route.get("/:id", verifyAccessToken, getDetail);
 
 // Delete file route
-route.delete("/:id", remove);
+route.delete("/:id", verifyAccessToken, remove);
 
 module.exports = route;

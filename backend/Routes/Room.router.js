@@ -11,21 +11,21 @@ const {
 } = require("../Controllers/Room.controller");
 
 // Get list room route
-route.get("/", getList);
+route.get("/", verifyAccessToken, getList);
 
 // Get list message in room route
-route.get("/:id/messages", getListMessage);
+route.get("/:id/messages", verifyAccessToken, getListMessage);
 
 // Create room route
-route.post("/", create);
+route.post("/", verifyAccessToken, create);
 
 // Update room route
-route.patch("/:id", update);
+route.patch("/:id", verifyAccessToken, update);
 
 // Detail room route
-route.get("/:id", getDetail);
+route.get("/:id", verifyAccessToken, getDetail);
 
 // Delete room route
-route.delete("/:id", remove);
+route.delete("/:id", verifyAccessToken, remove);
 
 module.exports = route;

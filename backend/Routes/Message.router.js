@@ -10,18 +10,18 @@ const {
 } = require("../Controllers/Message.controller");
 
 // Get list message route
-route.get("/", getList);
+route.get("/", verifyAccessToken, getList);
 
 // Create message route
-route.post("/", create);
+route.post("/", verifyAccessToken, create);
 
 // Update message route
-route.patch("/:id", update);
+route.patch("/:id", verifyAccessToken, update);
 
 // Detail message route
-route.get("/:id", getDetail);
+route.get("/:id", verifyAccessToken, getDetail);
 
 // Delete message route
-route.delete("/:id", remove);
+route.delete("/:id", verifyAccessToken, remove);
 
 module.exports = route;
