@@ -1,6 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const createError = require("http-errors");
+const cors = require("cors");
 const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
@@ -16,6 +17,23 @@ const app = express();
 
 // Change HTTP Headers
 app.use(helmet());
+
+// Cors
+const allowlist = [
+    "http://localhost:3000",
+    "http://172.0.0.1:3000",
+    "https://chat-funny.vercel.app",
+];
+const corsOptionsDelegate = function (req, callback) {
+    let corsOptions;
+    if (allowlist.indexOf(req.header("Origin")) !== -1) {
+        corsOptions = { origin: true }; // reflect (enable) the requested origin in the CORS response
+    } else {
+        corsOptions = { origin: false }; // disable CORS for this request
+    }
+    callback(null, corsOptions); // callback expects two parameters: error and options
+};
+app.use(cors(corsOptionsDelegate));
 
 // Read json
 app.use(express.json());
