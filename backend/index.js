@@ -21,8 +21,11 @@ app.use(helmet());
 // Cors
 const allowlist = [
     "http://localhost:3000",
+    "http://localhost:3000/",
     "http://172.0.0.1:3000",
+    "http://172.0.0.1:3000/",
     "https://chat-funny.vercel.app",
+    "https://chat-funny.vercel.app/",
 ];
 const corsOptionsDelegate = function (req, callback) {
     let corsOptions;
