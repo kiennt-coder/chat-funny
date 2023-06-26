@@ -9,7 +9,7 @@ const signAccessToken = async (userId) => {
         };
 
         // Create secret
-        const secret = "Kiennt";
+        const secret = process.env.SECRET_ACCESS_TOKEN;
 
         // Create options
         const options = {
@@ -39,7 +39,7 @@ const verifyAccessToken = (req, res, next) => {
         const token = bearerToken[1];
 
         // Verify token is correct
-        JWT.verify(token, "Kiennt", (err, payload) => {
+        JWT.verify(token, secret, (err, payload) => {
             if (err) {
                 if (err.name === "JsonWebTokenError") {
                     throw createError.Unauthorized();

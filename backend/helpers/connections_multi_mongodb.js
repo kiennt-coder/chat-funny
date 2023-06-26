@@ -32,9 +32,7 @@ function newConnection(uri) {
     return conn;
 }
 
-const testConnection = newConnection(
-    "mongodb+srv://kiennt:Kmnkmn123%40@cluster0.fbj7hce.mongodb.net/?retryWrites=true&w=majority"
-);
+const testConnection = newConnection(process.env.URI_MONGODB);
 
 module.exports = {
     testConnection,
