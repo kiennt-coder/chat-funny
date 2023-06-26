@@ -14,7 +14,7 @@ const {
 } = require("../Controllers/User.controller");
 
 // Get list user route
-route.get("/", vefiryRefreshToken, getList);
+route.get("/", verifyAccessToken, getList);
 
 // Register user route
 route.post("/register", register);
