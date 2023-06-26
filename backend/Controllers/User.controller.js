@@ -104,6 +104,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: {
+                    user,
                     accessToken,
                     refreshToken,
                 },
