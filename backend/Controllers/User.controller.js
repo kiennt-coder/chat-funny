@@ -63,7 +63,7 @@ module.exports = {
                     accessToken,
                     refreshToken: refToken,
                 },
-                message: "Đăng nhập thành công!"
+                message: "Làm mới token thành công!"
             });
         } catch (error) {
             next(error);
@@ -103,8 +103,11 @@ module.exports = {
 
             return res.json({
                 status: 200,
-                accessToken,
-                refreshToken,
+                data: {
+                    accessToken,
+                    refreshToken,
+                },
+                message: "Đăng nhập thành công!"
             });
         } catch (error) {
             next(error);
@@ -133,6 +136,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: users,
+                message: "Lấy danh sách thành công!"
             });
         } catch (error) {
             next(error);
@@ -152,6 +156,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: updateUser,
+                message: "Cập nhật tài khoản thành công!"
             });
         } catch (error) {
             next(error);
