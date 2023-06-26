@@ -39,6 +39,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: savedUser,
+                message: "Đăng ký thành công!"
             });
         } catch (error) {
             next(error);
@@ -58,8 +59,11 @@ module.exports = {
 
             return res.json({
                 status: 200,
-                accessToken,
-                refreshToken: refToken,
+                data: {
+                    accessToken,
+                    refreshToken: refToken,
+                },
+                message: "Đăng nhập thành công!"
             });
         } catch (error) {
             next(error);
