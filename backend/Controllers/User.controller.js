@@ -23,7 +23,7 @@ module.exports = {
 
             if (isExists) {
                 throw createError.Conflict(
-                    `${username} is ready been registed!`
+                    `${username} đã tồn tại!`
                 );
             }
 
@@ -86,14 +86,14 @@ module.exports = {
 
             // Check user alrealy exists
             if (!user) {
-                throw createError.Unauthorized("User not registed!");
+                throw createError.Unauthorized("Tài khoản không tồn tại!");
             }
 
             // Check password is correct
             const isCorrectPassword = await user.isCorrectPassword(password);
 
             if (!isCorrectPassword) {
-                throw createError.Unauthorized("Password is not correct");
+                throw createError.Unauthorized("Mật khẩu sai!");
             }
 
             // Create access token
