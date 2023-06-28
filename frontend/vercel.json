@@ -1,14 +1,8 @@
 {
-  "redirects": [
-    {
-      "source": "/(.*)",
-      "destination": "/"
-    }
-  ],
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "/"
+      "destination": "/index.html"
     }
   ]
 }
