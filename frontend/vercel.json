@@ -2,13 +2,13 @@
   "redirects": [
     {
       "source": "/(.*)",
-      "destination": "https://chat-funny.vercel.app"
+      "destination": "/"
     }
   ],
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://chat-funny.vercel.app"
+      "destination": "/"
     }
   ]
 }
