@@ -3,6 +3,6 @@
     { "src": "/", "dest": "/" },
     { "src": "/chats", "dest": "/chats" },
     { "src": "/sigin", "dest": "/signin" },
-    { "src": "/signup", "dest": "/signup" },
+    { "src": "/signup", "dest": "/signup" }
   ]
 }
