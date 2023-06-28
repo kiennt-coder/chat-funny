@@ -1,0 +1,17 @@
+### Login
+POST https://chat-funny-api.vercel.app/v1/users/login
+Content-Type: application/json
+
+{
+    "username": "kiennt",
+    "password": "kmnkmn123"
+}
+
+### Register
+POST https://chat-funny-api.vercel.app/v1/users/register
+Content-Type: application/json
+
+{
+    "username": "kiennt",
+    "password": "kmnkmn123"
+}
