@@ -49,7 +49,7 @@ const routes = createBrowserRouter(
                 nProgress.start();
                 let { default: Layout } = await import("../../layouts");
                 nProgress.done();
-                return { Component: Layout };
+                return { element: <Layout /> };
             },
             children: [
                 {
@@ -60,7 +60,7 @@ const routes = createBrowserRouter(
                             "../../pages/chats"
                         );
                         nProgress.done();
-                        return { Component: Chat };
+                        return { element: <Chat /> };
                     },
                 },
             ],
