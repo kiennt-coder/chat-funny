@@ -1,7 +1,6 @@
 {
   "name": "chat-funny",
   "version": "0.1.0",
-  "homepage": "",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
@@ -29,11 +28,6 @@
     "build": "react-scripts build",
     "predeploy": "npm run build",
     "deploy": "vercel --prod"
-  },
-  "vercel": {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/index.html" }
-    ]
   },
   "eslintConfig": {
     "extends": [
