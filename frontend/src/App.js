@@ -3,14 +3,12 @@ import configureAppStore from "./services/store";
 import { ThemeProvider } from "styled-components";
 import { ConfigProvider } from "antd";
 import mainTheme from "./configs/themes";
-import { BrowserRouter, RouterProvider, Routes } from "react-router-dom";
+import { RouterProvider } from "react-router-dom";
+import LoadingComponent from "./components/LoadingComponent";
 import routes from "./configs/routers";
 import setting from "./configs/setting";
 import "antd/dist/reset.css";
 import "./App.css";
-import LoadingComponent from "./components/LoadingComponent";
-// import { Suspense } from "react";
-// import LoadingComponent from "./components/LoadingComponent";
 
 const store = configureAppStore();
 
@@ -32,15 +30,10 @@ function App() {
                         },
                     }}
                 >
-                    {/* <Suspense fallback={<LoadingComponent />}> */}
-                    {/* <RouterProvider
+                    <RouterProvider
                         router={routes}
                         fallbackElement={<LoadingComponent />}
-                    /> */}
-                    <BrowserRouter>
-                        <Routes>{routes()}</Routes>
-                    </BrowserRouter>
-                    {/* </Suspense> */}
+                    />
                 </ConfigProvider>
             </ThemeProvider>
         </Provider>
