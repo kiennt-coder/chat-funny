@@ -1,13 +1,45 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
+import { Provider } from "react-redux";
+import configureAppStore from "./services/store";
+import { ThemeProvider } from "styled-components";
+import { ConfigProvider } from "antd";
+import mainTheme from "./configs/themes";
+import { RouterProvider } from "react-router-dom";
+import routes from "./configs/routers";
+import setting from "./configs/setting";
+import "antd/dist/reset.css";
 import reportWebVitals from "./reportWebVitals";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+document.title = setting.APP_NAME;
+const store = configureAppStore();
 root.render(
     <React.StrictMode>
-        <App />
+        <Provider store={store}>
+            <ThemeProvider theme={mainTheme}>
+                <ConfigProvider
+                    theme={{
+                        token: {
+                            colorPrimary: mainTheme.palette.primary[0],
+                        },
+                        components: {
+                            // Tooltip: {
+                            //     colorPrimary: mainTheme.palette.primary[3],
+                            // },
+                        },
+                    }}
+                >
+                    {/* <Suspense fallback={<LoadingComponent />}> */}
+                    <RouterProvider
+                        router={routes}
+                        // fallbackElement={<LoadingComponent />}
+                    />
+                    {/* </Suspense> */}
+                </ConfigProvider>
+            </ThemeProvider>
+        </Provider>
     </React.StrictMode>
 );
 
