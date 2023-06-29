@@ -12,7 +12,7 @@ const routes = createBrowserRouter([
                 Component: asyncComponent(() => import("../../layouts")),
                 children: [
                     {
-                        path: "chats",
+                        path: "/chats",
                         Component: asyncComponent(() =>
                             import("../../pages/chats")
                         ),
@@ -26,11 +26,11 @@ const routes = createBrowserRouter([
                 ],
             },
             {
-                path: "signin",
+                path: "/signin",
                 Component: asyncComponent(() => import("../../pages/login")),
             },
             {
-                path: "signup",
+                path: "/signup",
                 Component: asyncComponent(() => import("../../pages/register")),
             },
         ],
