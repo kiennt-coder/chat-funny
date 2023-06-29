@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useState } from "react";
 
 function asyncComponent(importComponent) {
     function AsyncFunc(props) {
-        const [component, setComponent] = useState(<div></div>);
+        const [component, setComponent] = useState(undefined);
 
         useLayoutEffect(() => {
             Nprogress.start();

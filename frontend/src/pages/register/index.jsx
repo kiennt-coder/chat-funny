@@ -22,7 +22,7 @@ const Signup = () => {
 
     useEffect(() => {
         Object.keys(user).length && navigate("/signin")
-    }, [user])
+    }, [user, navigate])
 
     return (
         <Container>

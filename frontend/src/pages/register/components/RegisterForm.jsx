@@ -46,7 +46,7 @@ const RegisterForm = ({onSubmit, ...props}) => {
 
     useEffect(() => {
         pasteNotAllowFunc(passwordId)
-    }, [])
+    }, [passwordId])
 
     return (
         <LoginFormWrapper {...props}>

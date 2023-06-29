@@ -8,6 +8,7 @@ import routes from "./configs/routers";
 import setting from "./configs/setting";
 import "antd/dist/reset.css";
 import "./App.css";
+import LoadingComponent from "./components/LoadingComponent";
 // import { Suspense } from "react";
 // import LoadingComponent from "./components/LoadingComponent";
 
@@ -34,7 +35,7 @@ function App() {
                     {/* <Suspense fallback={<LoadingComponent />}> */}
                     <RouterProvider
                         router={routes}
-                        // fallbackElement={<LoadingComponent />}
+                        fallbackElement={<LoadingComponent />}
                     />
                     {/* </Suspense> */}
                 </ConfigProvider>
