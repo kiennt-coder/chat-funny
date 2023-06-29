@@ -10,6 +10,7 @@ const routes = createBrowserRouter([
             {
                 path: "/",
                 Component: asyncComponent(() => import("../../layouts")),
+                exact: true,
                 children: [
                     {
                         path: "/chats",
