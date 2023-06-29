@@ -35,10 +35,15 @@ import Error from "../../pages/error";
 //     )
 // );
 
-const LayoutMain = asyncComponent(() => import("../../layouts"));
-const Chat = asyncComponent(() => import("../../pages/chats"));
-const Login = asyncComponent(() => import("../../pages/login"));
-const Register = asyncComponent(() => import("../../pages/register"));
+// const LayoutMain = asyncComponent(() => import("../../layouts"));
+// const Chat = asyncComponent(() => import("../../pages/chats"));
+// const Login = asyncComponent(() => import("../../pages/login"));
+// const Register = asyncComponent(() => import("../../pages/register"));
+
+import LayoutMain from "../../layouts";
+import Chat from "../../pages/chats";
+import Login from "../../pages/login";
+import Register from "../../pages/register";
 
 const routes = () => (
     <Route path="/" errorElement={<Error />}>
