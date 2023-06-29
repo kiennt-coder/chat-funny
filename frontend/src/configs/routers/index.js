@@ -7,32 +7,56 @@ import asyncComponent from "../../utils/funcAsync";
 import Error from "../../pages/error";
 // import nProgress from "nprogress";
 
-const routes = createBrowserRouter(
-    createRoutesFromElements(
-        <Route path="/" errorElement={<Error />}>
-            <Route
-                path=""
-                Component={asyncComponent(() => import("../../layouts"))}
-            >
-                <Route
-                    path="chats"
-                    Component={asyncComponent(() =>
-                        import("../../pages/chats")
-                    )}
-                />
-            </Route>
+// const routes = createBrowserRouter(
+//     createRoutesFromElements(
+//         <Route path="/" errorElement={<Error />}>
+//             <Route
+//                 path=""
+//                 Component={asyncComponent(() => import("../../layouts"))}
+//             >
+//                 <Route
+//                     path="chats"
+//                     Component={asyncComponent(() =>
+//                         import("../../pages/chats")
+//                     )}
+//                 />
+//             </Route>
 
-            <Route
-                path="signin"
-                Component={asyncComponent(() => import("../../pages/login"))}
-            />
+//             <Route
+//                 path="signin"
+//                 Component={asyncComponent(() => import("../../pages/login"))}
+//             />
 
+//             <Route
+//                 path="signup"
+//                 Component={asyncComponent(() => import("../../pages/register"))}
+//             />
+//         </Route>
+//     )
+// );
+
+const routes = () => (
+    <Route path="/" errorElement={<Error />}>
+        <Route
+            path=""
+            Component={asyncComponent(() => import("../../layouts"))}
+        >
             <Route
-                path="signup"
-                Component={asyncComponent(() => import("../../pages/register"))}
+                path="chats"
+                Component={asyncComponent(() => import("../../pages/chats"))}
             />
         </Route>
-    )
+
+        <Route
+            path="signin"
+            Component={asyncComponent(() => import("../../pages/login"))}
+        />
+
+        <Route
+            path="signup"
+            Component={asyncComponent(() => import("../../pages/register"))}
+        />
+    </Route>
 );
 
 // const routes = createBrowserRouter(

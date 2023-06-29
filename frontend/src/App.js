@@ -3,7 +3,7 @@ import configureAppStore from "./services/store";
 import { ThemeProvider } from "styled-components";
 import { ConfigProvider } from "antd";
 import mainTheme from "./configs/themes";
-import { RouterProvider } from "react-router-dom";
+import { BrowserRouter, RouterProvider, Routes } from "react-router-dom";
 import routes from "./configs/routers";
 import setting from "./configs/setting";
 import "antd/dist/reset.css";
@@ -33,10 +33,13 @@ function App() {
                     }}
                 >
                     {/* <Suspense fallback={<LoadingComponent />}> */}
-                    <RouterProvider
+                    {/* <RouterProvider
                         router={routes}
                         fallbackElement={<LoadingComponent />}
-                    />
+                    /> */}
+                    <BrowserRouter>
+                        <Routes>{routes()}</Routes>
+                    </BrowserRouter>
                     {/* </Suspense> */}
                 </ConfigProvider>
             </ThemeProvider>
