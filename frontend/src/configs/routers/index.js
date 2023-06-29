@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
-import asyncComponent from "../../utils/funcAsync";
+// import asyncComponent from "../../utils/funcAsync";
 import Error from "../../pages/error";
+import nProgress from "nprogress";
 
 const routes = createBrowserRouter(
     [
@@ -45,18 +46,20 @@ const routes = createBrowserRouter(
             path: "/",
             errorElement: <Error />,
             async lazy() {
-                let LayoutMain = await asyncComponent(() =>
-                    import("../../layouts")
-                );
-                return { Component: LayoutMain };
+                nProgress.start();
+                let { default: Layout } = await import("../../layouts");
+                nProgress.done();
+                return { Component: Layout };
             },
             children: [
                 {
                     path: "chats",
                     async lazy() {
-                        let Chat = await asyncComponent(() =>
-                            import("../../pages/chats")
+                        nProgress.start();
+                        let { default: Chat } = await import(
+                            "../../pages/chats"
                         );
+                        nProgress.done();
                         return { Component: Chat };
                     },
                 },
