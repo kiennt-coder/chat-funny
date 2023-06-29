@@ -24,19 +24,9 @@ root.render(
                         token: {
                             colorPrimary: mainTheme.palette.primary[0],
                         },
-                        components: {
-                            // Tooltip: {
-                            //     colorPrimary: mainTheme.palette.primary[3],
-                            // },
-                        },
                     }}
                 >
-                    {/* <Suspense fallback={<LoadingComponent />}> */}
-                    <RouterProvider
-                        router={routes}
-                        // fallbackElement={<LoadingComponent />}
-                    />
-                    {/* </Suspense> */}
+                    <RouterProvider router={routes} />
                 </ConfigProvider>
             </ThemeProvider>
         </Provider>
