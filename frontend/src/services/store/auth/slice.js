@@ -4,6 +4,7 @@ const initialState = {
     user: {},
     token: "",
     refreshToken: "",
+    remember: false,
     loading: false,
 };
 
@@ -21,6 +22,7 @@ export const authSlice = createSlice({
             user: payload?.user || {},
             token: payload.accessToken,
             refreshToken: payload.refreshToken,
+            remember: payload.remember,
             loading: false,
         }),
         loginRejected: (state) => ({
@@ -42,6 +44,23 @@ export const authSlice = createSlice({
             ...state,
             loading: false,
         }),
+
+        // Logout
+        logout: (state) => ({
+            ...state,
+            loading: true,
+        }),
+        logoutFulfilled: (state) => ({
+            ...state,
+            user: {},
+            token: "",
+            refreshToken: "",
+            loading: false,
+        }),
+        logoutRejected: (state) => ({
+            ...state,
+            loading: false,
+        }),
     },
 });
 
@@ -55,5 +74,10 @@ export const {
     register,
     registerFulfilled,
     registerRejected,
+
+    // Logout
+    logout,
+    logoutFulfilled,
+    logoutRejected,
 } = authSlice.actions;
 export default authSlice.reducer;

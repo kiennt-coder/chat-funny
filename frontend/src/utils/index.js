@@ -1,4 +1,4 @@
-export function pasteNotAllowFunc(xid) {
-    let myInput = document.getElementById(xid);
+export function pasteNotAllowFunc(id) {
+    let myInput = document.getElementById(id);
     myInput.onpaste = (e) => e.preventDefault();
 }

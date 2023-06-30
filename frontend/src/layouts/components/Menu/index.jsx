@@ -54,68 +54,6 @@ const Menu = ({
                 </Tooltip>
             ,
         },
-
-        {
-            key: 'profile1',
-            label:
-                <Tooltip title="Thông tin người dùng">
-                    <Link to="/profile">
-                        <UserOutlined />
-                    </Link>
-                </Tooltip>
-            ,
-        },
-        {
-            key: 'chats2',
-            label:
-                <Tooltip title="Nhắn tin">
-                    <Link to="/chats">
-                        <MessageOutlined />
-                    </Link>
-                </Tooltip>
-            ,
-        },
-        {
-            key: 'groups3',
-            label:
-                <Tooltip title="Nhóm">
-                    <Link to="/groups">
-                        <UsergroupAddOutlined />
-                    </Link>
-                </Tooltip>
-            ,
-        },
-
-        {
-            key: 'profile4',
-            label:
-                <Tooltip title="Thông tin người dùng">
-                    <Link to="/profile">
-                        <UserOutlined />
-                    </Link>
-                </Tooltip>
-            ,
-        },
-        {
-            key: 'chats5',
-            label:
-                <Tooltip title="Nhắn tin">
-                    <Link to="/chats">
-                        <MessageOutlined />
-                    </Link>
-                </Tooltip>
-            ,
-        },
-        {
-            key: 'groups6',
-            label:
-                <Tooltip title="Nhóm">
-                    <Link to="/groups">
-                        <UsergroupAddOutlined />
-                    </Link>
-                </Tooltip>
-            ,
-        },
     ]
 
     return (

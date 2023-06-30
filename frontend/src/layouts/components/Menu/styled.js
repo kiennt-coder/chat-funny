@@ -5,7 +5,8 @@ import MenuWrapper from "../../../components/uiElements/styled/Menu";
 const MenuSiderWrapper = styled(MenuWrapper)`
     &.ant-menu-light.ant-menu-root.ant-menu-inline {
         border-inline-end: unset;
-        height: calc(100% - ${size("siderWidth")});
+        max-height: calc(100% - (${size("siderWidth")} + 3.983rem));
+        height: fit-content;
         overflow-x: hidden;
         overflow-y: auto;
         scroll-snap-type: y mandatory;
@@ -16,7 +17,7 @@ const MenuSiderWrapper = styled(MenuWrapper)`
         }
 
         & .ant-menu-item {
-            padding: 0 1rem !important;
+            padding: 0 !important;
             justify-content: center;
             height: ${size("menuIconWidth")};
             width: ${size("menuIconWidth")};

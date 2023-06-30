@@ -1,4 +1,5 @@
 import Menu from "./Menu";
+import Dropdown from "./Dropdown";
 import Tooltip from "./Tooltip";
 import Form from "./Form";
 import FormItem from "./FormItem";
@@ -8,6 +9,7 @@ import Button from "./Button";
 import Avatar from "./Avatar";
 export {
     Menu,
+    Dropdown,
     Tooltip,
     Form,
     FormItem,

@@ -1,12 +1,13 @@
+import { forwardRef } from "react"
 import AvatarWrapper from "./styled/Avatar"
 
 
-const Avatar = (props) => {
+const Avatar = forwardRef(({...props}, ref) => {
     return (
         <>
-            <AvatarWrapper {...props} />
+            <AvatarWrapper {...props} ref={ref} />
         </>
     )
-}
+})
 
 export default Avatar

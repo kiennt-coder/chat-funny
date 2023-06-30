@@ -1,5 +1,4 @@
 import { Provider } from "react-redux";
-import configureAppStore from "./services/store";
 import { ThemeProvider } from "styled-components";
 import { ConfigProvider } from "antd";
 import mainTheme from "./configs/themes";
@@ -9,8 +8,7 @@ import routes from "./configs/routers";
 import setting from "./configs/setting";
 import "antd/dist/reset.css";
 import "./App.css";
-
-const store = configureAppStore();
+import store from "./services/store";
 
 function App() {
     document.title = setting.APP_NAME;

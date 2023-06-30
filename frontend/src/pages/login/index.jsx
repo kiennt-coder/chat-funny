@@ -15,8 +15,7 @@ const Login = () => {
     const {token} = useSelector(state => state.auth);
 
     const onSubmit = (data) => {
-        const {user} = data
-        dispatch(login(user))
+        dispatch(login(data))
     }
 
     useEffect(() => {

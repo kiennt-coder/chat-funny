@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 import
     ChatDetailWrapper,
     {
@@ -26,11 +26,11 @@ import {
 import ChatMessage from "../ChatMessage"
 
 const ChatDetail = ({...props}) => {
-    const params = useParams()
+    // const params = useParams()
 
-    const {id} = params
+    // const {id} = params
 
-    console.log(id, "id")
+    // console.log(id, "id")
 
     const listHeaderIcons = [
         {

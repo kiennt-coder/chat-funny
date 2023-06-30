@@ -6,6 +6,7 @@ import { setMenuItemActive } from "../services/store/app/slice"
 import Logo from "./components/Logo";
 import Menu from "./components/Menu";
 import ChatDetail from "../components/ChatDetail";
+import UserDropdown from "../components/UserDropdown";
 
 const { Sider, Content } = Layout;
 const SiderWapper = styledSider(Sider)
@@ -23,6 +24,7 @@ const LayoutMain = () => {
             <SiderWapper>
                 <Logo onChangeMenuItem={handleChangeMenuItemSelected}/>
                 <Menu onChangeMenuItem={handleChangeMenuItemSelected}/>
+                <UserDropdown />
             </SiderWapper>
             <ContentWrapper>
                 <Row>

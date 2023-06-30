@@ -3,7 +3,7 @@ import createSagaMiddleware from "redux-saga";
 import reducers from "./reducers";
 import rootSaga from "./sagas";
 
-export default function configureAppStore(preloadedState) {
+function configureAppStore(preloadedState) {
     const SagaMiddleware = createSagaMiddleware();
 
     const store = configureStore({
@@ -22,3 +22,9 @@ export default function configureAppStore(preloadedState) {
 
     return store;
 }
+
+const store = configureAppStore();
+
+export const getState = store.getState;
+
+export default store;
