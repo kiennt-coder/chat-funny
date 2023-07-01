@@ -19,6 +19,9 @@ const UserSchema = new Schema(
         nickname: {
             type: String,
         },
+        avatar: {
+            type: String,
+        },
         rooms: [
             {
                 type: Schema.Types.ObjectId,

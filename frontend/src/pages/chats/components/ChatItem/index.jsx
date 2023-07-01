@@ -7,7 +7,7 @@ import
         ChatItemSubTitle, ChatItemTitle
     } from "./styled"
 
-const ChatItem = ({to="", ...props}) => {
+const ChatItem = ({to="", room, ...props}) => {
 
     return (
         <Link to={to}>
@@ -15,13 +15,15 @@ const ChatItem = ({to="", ...props}) => {
                 <ChatItemAvatar>
                     <Avatar
                         size="large"
+                        src={room?.avatar}
+                        alt={room?.name}
                     >
-                        K
+                        {room?.name?.slice(0, 1).toUpperCase()}
                     </Avatar>
                 </ChatItemAvatar>
                 <ChatItemContent>
                     <ChatItemTitle>
-                        Kiên Trung Ngô
+                        {room?.name}
                     </ChatItemTitle>
                     <ChatItemSubTitle>
                         hello, world! okay sure😄👍

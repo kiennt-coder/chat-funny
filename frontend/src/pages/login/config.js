@@ -5,7 +5,7 @@ import { apiPost } from "../../services/api";
 const config = {
     // URL
     LOGIN: `${setting.API_URL}users/login`,
-    REFRESH_TOKEN: `${setting.API_URL}user/refresh-token`,
+    REFRESH_TOKEN: `${setting.API_URL}users/refresh-token`,
 
     // Action
     Login: async (payload) => {
@@ -28,7 +28,7 @@ const config = {
 
             const { status } = res;
             if (status === 200) {
-                message.success(res.message);
+                // message.success(res.message);
                 return res.data;
             }
         } catch (error) {

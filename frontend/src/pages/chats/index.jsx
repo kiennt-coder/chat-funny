@@ -13,8 +13,8 @@ const Chats = () => {
     const {rooms} = useSelector(state => state.room)
 
     const renderRooms = (list=[]) => {
-        return list.map(item => (
-            <ChatItem to="123" />
+        return list.map((item, index) => (
+            <ChatItem key={index} to={item._id} room={item} />
         ))
     }
 
@@ -34,17 +34,6 @@ const Chats = () => {
                 {
                     renderRooms(rooms)
                 }
-                {/* <ChatItem to="123" />
-                <ChatItem to="456" />
-                <ChatItem to="789" />
-                <ChatItem to="111" />
-                <ChatItem to="112" />
-                <ChatItem to="113" />
-                <ChatItem to="114" />
-                <ChatItem to="115" />
-                <ChatItem to="116" />
-                <ChatItem to="117" />
-                <ChatItem to="118" /> */}
             </ChatBox>
         </PageWrapper>
     )
