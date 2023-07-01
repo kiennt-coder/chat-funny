@@ -13,7 +13,7 @@ const signAccessToken = async (userId) => {
 
         // Create options
         const options = {
-            expiresIn: "5m",
+            expiresIn: `${5 * 60 * 1000}ms`,
         };
 
         // Sign a new token
