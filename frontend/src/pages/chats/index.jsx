@@ -4,8 +4,24 @@ import { Input } from "../../components/uiElements"
 import { SearchOutlined } from "@ant-design/icons"
 import ChatBox from "./components/ChatBox"
 import ChatItem from "./components/ChatItem"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getList } from "../../services/store/room/slice"
 
 const Chats = () => {
+    const dispatch = useDispatch()
+    const {rooms} = useSelector(state => state.room)
+
+    const renderRooms = (list=[]) => {
+        return list.map(item => (
+            <ChatItem to="123" />
+        ))
+    }
+
+    useEffect(() => {
+        !rooms.length && dispatch(getList())
+    }, [rooms, dispatch])
+
     return (
         <PageWrapper
             title="Tin nhắn"
@@ -15,7 +31,10 @@ const Chats = () => {
             </PageFilter>
             
             <ChatBox>
-                <ChatItem to="123" />
+                {
+                    renderRooms(rooms)
+                }
+                {/* <ChatItem to="123" />
                 <ChatItem to="456" />
                 <ChatItem to="789" />
                 <ChatItem to="111" />
@@ -25,7 +44,7 @@ const Chats = () => {
                 <ChatItem to="115" />
                 <ChatItem to="116" />
                 <ChatItem to="117" />
-                <ChatItem to="118" />
+                <ChatItem to="118" /> */}
             </ChatBox>
         </PageWrapper>
     )

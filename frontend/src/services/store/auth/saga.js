@@ -9,6 +9,9 @@ import {
     logout,
     logoutFulfilled,
     logoutRejected,
+    refreshToken,
+    refreshTokenFulfilled,
+    refreshTokenRejected,
 } from "./slice";
 import configLogin from "../../../pages/login/config";
 import configRegister from "../../../pages/register/config";
@@ -23,8 +26,14 @@ function* loginUser({ payload }) {
         if (!res) yield put(loginRejected());
         else {
             localStorage.setItem(LOCAL_STORAGE.USER, JSON.stringify(res.user));
-            localStorage.setItem(LOCAL_STORAGE.ACCESS_TOKEN, res.accessToken);
-            localStorage.setItem(LOCAL_STORAGE.REFRESH_TOKEN, res.refreshToken);
+            localStorage.setItem(
+                LOCAL_STORAGE.ACCESS_TOKEN,
+                JSON.stringify(res.accessToken)
+            );
+            localStorage.setItem(
+                LOCAL_STORAGE.REFRESH_TOKEN,
+                JSON.stringify(res.refreshToken)
+            );
             localStorage.setItem(LOCAL_STORAGE.REMEMBER, remember);
             yield put(
                 loginFulfilled({
@@ -61,8 +70,23 @@ function* logoutUser() {
     }
 }
 
+function* refreshTokenUser({ payload }) {
+    try {
+        const res = yield call(configLogin.RefreshToken, payload);
+        if (!res) yield put(refreshTokenRejected());
+        else {
+            localStorage.setItem(LOCAL_STORAGE.ACCESS_TOKEN, res.accessToken);
+            localStorage.setItem(LOCAL_STORAGE.REFRESH_TOKEN, res.refreshToken);
+            yield put(refreshTokenFulfilled(res));
+        }
+    } catch (error) {
+        yield put(refreshTokenRejected());
+    }
+}
+
 export default function* mySaga() {
     yield takeLatest(login.toString(), loginUser);
     yield takeLatest(register.toString(), registerUser);
     yield takeLatest(logout.toString(), logoutUser);
+    yield takeLatest(refreshToken.toString(), refreshTokenUser);
 }

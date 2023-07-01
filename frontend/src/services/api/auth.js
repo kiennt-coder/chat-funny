@@ -1,9 +1,21 @@
-import { apiDelete, apiGet, apiPatch, apiPost, apiPut } from ".";
+import { getState } from "../store";
+import instance, { apiDelete, apiGet, apiPatch, apiPost, apiPut } from ".";
+
+instance.interceptors.request.use((config) => {
+    const { headers } = config;
+    if (headers?.Authorization) {
+        let { auth } = getState();
+        console.log(auth.token);
+    }
+
+    return config;
+});
 
 const headerConfigs = async (headers = {}) => {
+    let { auth } = getState();
     return {
         ...headers,
-        Authorization: `Bearer token`,
+        Authorization: `Bearer ${auth.token}`,
     };
 };
 

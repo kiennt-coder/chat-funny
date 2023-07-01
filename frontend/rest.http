@@ -1,10 +1,10 @@
 ### Login
-POST https://chat-funny-api.vercel.app/v1/users/login
+PATCH https://chat-funny-api.vercel.app/v1/users/649dcd8fd88aae8cadde54d1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODgyMDUxMzYsImV4cCI6MTY4ODIwNTQzNn0.jviftPVY7R-1lT_bqJwUY-KKx92piAr9whHn6zx-_z8
 
 {
-    "username": "kiennt",
-    "password": "kmnkmn123"
+    "friends": ["6480ab1ed065370c33f9750c"]
 }
 
 ### Register
@@ -15,3 +15,9 @@ Content-Type: application/json
     "username": "kiennt",
     "password": "kmnkmn123"
 }
+
+### get list
+
+GET https://chat-funny-api.vercel.app/v1/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODgyMDUxMzYsImV4cCI6MTY4ODIwNTQzNn0.jviftPVY7R-1lT_bqJwUY-KKx92piAr9whHn6zx-_z8

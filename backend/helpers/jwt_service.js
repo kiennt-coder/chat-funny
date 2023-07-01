@@ -19,7 +19,7 @@ const signAccessToken = async (userId) => {
         // Sign a new token
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err);
-            resolve(token);
+            resolve({ token, expiresIn });
         });
     });
 };
@@ -73,22 +73,12 @@ const signRefreshToken = async (userId) => {
         // Sign a new token
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err);
-            resolve(token);
+            resolve({ token, expiresIn });
         });
     });
 };
 
 // Handle verify refresh token
-// const vefiryRefreshToken = async (refreshToken) => {
-//     return new Promise((resolve, reject) => {
-//         JWT.verify(refreshToken, process.env.SECRET_REFRESH_TOKEN, (err, payload) => {
-//             if(err) {
-//                 reject(err)
-//             }
-//             resolve(payload)
-//         })
-//     })
-// }
 const vefiryRefreshToken = async (req, res, next) => {
     try {
         const { refreshToken } = req.body;

@@ -100,3 +100,5 @@ export const apiPatch = async (url, params = null, headers = {}) => {
 export const apiDelete = async (url, params = null, headers = {}) => {
     return await callApi(url, params, headers, "DELETE", "json");
 };
+
+export default instance;

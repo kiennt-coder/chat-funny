@@ -2,7 +2,7 @@ import { Avatar, Dropdown } from "../uiElements"
 import { PoweroffOutlined } from "@ant-design/icons"
 import UserDropdownWrapper from "./styled"
 import { logout } from "../../services/store/auth/slice"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { useRef } from "react"
 
@@ -10,6 +10,7 @@ const UserDropdown = ({...props}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const avatarRef = useRef()
+    const {user} = useSelector(state => state.auth)
 
     const items = [
         {
@@ -43,7 +44,9 @@ const UserDropdown = ({...props}) => {
                 }}
                 trigger={['click', 'contextMenu']}
             >
-                <Avatar ref={avatarRef} className="dropdown__avatar">K</Avatar>
+                <Avatar ref={avatarRef} className="dropdown__avatar">
+                    {user?.nickname?.slice(0, 1)}
+                </Avatar>
             </Dropdown>
         </UserDropdownWrapper>
     )
