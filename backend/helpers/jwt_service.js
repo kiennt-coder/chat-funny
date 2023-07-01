@@ -39,7 +39,7 @@ const verifyAccessToken = (req, res, next) => {
         const token = bearerToken[1];
 
         // Verify token is correct
-        JWT.verify(token, secret, (err, payload) => {
+        JWT.verify(token, process.env.SECRET_ACCESS_TOKEN, (err, payload) => {
             if (err) {
                 if (err.name === "JsonWebTokenError") {
                     throw createError.Unauthorized();
