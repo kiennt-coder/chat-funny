@@ -5,8 +5,10 @@ const { LOCAL_STORAGE } = setting;
 
 const initialState = {
     user: JSON.parse(localStorage.getItem(LOCAL_STORAGE.USER)) || {},
-    accessToken: JSON.parse(localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN)) || {},
-    refreshToken: JSON.parse(localStorage.getItem(LOCAL_STORAGE.REFRESH_TOKEN)) || {},
+    accessToken:
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN)) || {},
+    refreshToken:
+        JSON.parse(localStorage.getItem(LOCAL_STORAGE.REFRESH_TOKEN)) || {},
     remember: localStorage.getItem(LOCAL_STORAGE.REMEMBER) || "",
     loading: false,
 };

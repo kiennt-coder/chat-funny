@@ -19,7 +19,7 @@ const signAccessToken = async (userId) => {
         // Sign a new token
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err);
-            resolve({ token, expiresIn });
+            resolve({ token, expired: options.expiresIn });
         });
     });
 };
@@ -73,7 +73,7 @@ const signRefreshToken = async (userId) => {
         // Sign a new token
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err);
-            resolve({ token, expiresIn });
+            resolve({ token, expired: options.expiresIn });
         });
     });
 };
