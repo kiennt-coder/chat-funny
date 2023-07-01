@@ -12,15 +12,15 @@ import { useEffect } from "react"
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {token} = useSelector(state => state.auth);
+    const {accessToken} = useSelector(state => state.auth);
 
     const onSubmit = (data) => {
         dispatch(login(data))
     }
 
     useEffect(() => {
-        token && navigate("/chats")
-    }, [token, navigate])
+        accessToken && navigate("/chats")
+    }, [accessToken, navigate])
 
     return (
         <Container>

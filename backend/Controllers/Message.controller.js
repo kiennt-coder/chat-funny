@@ -13,7 +13,8 @@ module.exports = {
 
             return res.json({
                 status: 200,
-                data: messages,
+                data: { messages },
+                message: "Lấy danh sách thành công!",
             });
         } catch (error) {
             next(error);
@@ -32,14 +33,15 @@ module.exports = {
 
             if (!detailMessage) {
                 throw createError({
-                    message: "Cannot find by id!",
+                    message: "Không tìm thấy!",
                     data: detailMessage,
                 });
             }
 
             return res.json({
                 status: 200,
-                data: detailMessage,
+                data: { detailMessage },
+                message: "Lấy thông tin thành công!",
             });
         } catch (error) {
             next(error);
@@ -54,7 +56,7 @@ module.exports = {
 
             if (error) {
                 throw createError({
-                    message: "Validate faild!",
+                    message: "Xác thực thất bại!",
                     data: error.details[0].message,
                 });
             }
@@ -67,14 +69,15 @@ module.exports = {
 
             if (!savedMessage) {
                 throw createError({
-                    message: "Cannot save! meesage!",
+                    message: "Thêm mới thất bại!",
                     data: savedMessage,
                 });
             }
 
             return res.json({
                 status: 200,
-                data: savedMessage,
+                data: { savedMessage },
+                message: "Thêm mới thành công!",
             });
         } catch (error) {
             next(error);
@@ -90,7 +93,7 @@ module.exports = {
 
             if (error) {
                 throw createError({
-                    message: "Validate failed!",
+                    message: "Xác thực thất bại!",
                     data: error.details[0].message,
                 });
             }
@@ -105,14 +108,15 @@ module.exports = {
 
             if (!updatedMessage) {
                 throw createError({
-                    message: "Update failed!",
+                    message: "Cập nhật thất bại!",
                     data: updatedMessage,
                 });
             }
 
             return res.json({
                 status: 200,
-                data: updatedMessage,
+                data: { updatedMessage },
+                message: "Cập nhật thành công!",
             });
         } catch (error) {
             next(error);
@@ -128,13 +132,14 @@ module.exports = {
 
             if (!removedMessage)
                 throw createError({
-                    message: "Not find with id!",
+                    message: "Không tìm thấy!",
                     data: removedMessage,
                 });
 
             return res.json({
                 status: 200,
-                data: removedMessage,
+                data: { removedMessage },
+                message: "Xóa thành công!",
             });
         } catch (error) {
             next(error);

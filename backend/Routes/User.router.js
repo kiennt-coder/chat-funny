@@ -11,10 +11,14 @@ const {
     logout,
     getList,
     update,
+    getDetail,
 } = require("../Controllers/User.controller");
 
 // Get list user route
 route.get("/", verifyAccessToken, getList);
+
+// Get detail user route
+route.get("/:id", verifyAccessToken, getDetail);
 
 // Register user route
 route.post("/register", register);

@@ -22,9 +22,7 @@ module.exports = {
             });
 
             if (isExists) {
-                throw createError.Conflict(
-                    `${username} đã tồn tại!`
-                );
+                throw createError.Conflict(`${username} đã tồn tại!`);
             }
 
             // Create user model
@@ -39,7 +37,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: savedUser,
-                message: "Đăng ký thành công!"
+                message: "Đăng ký thành công!",
             });
         } catch (error) {
             next(error);
@@ -63,7 +61,7 @@ module.exports = {
                     accessToken,
                     refreshToken: refToken,
                 },
-                message: "Làm mới token thành công!"
+                message: "Làm mới token thành công!",
             });
         } catch (error) {
             next(error);
@@ -108,7 +106,7 @@ module.exports = {
                     accessToken,
                     refreshToken,
                 },
-                message: "Đăng nhập thành công!"
+                message: "Đăng nhập thành công!",
             });
         } catch (error) {
             next(error);
@@ -137,7 +135,7 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: users,
-                message: "Lấy danh sách thành công!"
+                message: "Lấy danh sách thành công!",
             });
         } catch (error) {
             next(error);
@@ -157,7 +155,29 @@ module.exports = {
             return res.json({
                 status: 200,
                 data: updateUser,
-                message: "Cập nhật tài khoản thành công!"
+                message: "Cập nhật tài khoản thành công!",
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+    getDetail: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const detailUser = await User.findById(id);
+
+            if (!detailUser) {
+                throw createError({
+                    message: "Không tìm thấy!",
+                    data: detailUser,
+                });
+            }
+
+            return res.json({
+                status: 200,
+                data: { detailUser },
+                message: "Lấy thông tin thành công!",
             });
         } catch (error) {
             next(error);

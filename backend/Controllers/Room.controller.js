@@ -11,7 +11,10 @@ module.exports = {
 
             return res.json({
                 status: 200,
-                data: rooms,
+                data: {
+                    rooms,
+                },
+                message: "Lấy danh sách thành công!",
             });
         } catch (error) {
             next(error);
@@ -27,14 +30,15 @@ module.exports = {
 
             if (!messages) {
                 throw createError({
-                    message: "Cannot find message in room!",
+                    message: "Không tìm thấy tin nhắn nào!",
                     data: messages,
                 });
             }
 
             return res.json({
                 status: 200,
-                data: messages,
+                data: { messages },
+                message: "Lấy danh sách thành công!",
             });
         } catch (error) {
             next(error);
@@ -53,14 +57,15 @@ module.exports = {
 
             if (!detailRoom) {
                 throw createError({
-                    message: "Cannot find by id!",
+                    message: "Không tìm thấy phòng!",
                     data: detailRoom,
                 });
             }
 
             return res.json({
                 status: 200,
-                data: detailRoom,
+                data: { detailRoom },
+                message: "Lấy thông tin thành công!",
             });
         } catch (error) {
             next(error);
@@ -77,7 +82,7 @@ module.exports = {
 
             if (error) {
                 throw createError({
-                    message: "Validate faild!",
+                    message: "Xác thực thất bại!",
                     data: error.details[0].message,
                 });
             }
@@ -94,7 +99,8 @@ module.exports = {
 
             return res.json({
                 status: 200,
-                data: savedRoom,
+                data: { savedRoom },
+                message: "Thêm mới thành công!",
             });
         } catch (error) {
             next(error);
@@ -110,7 +116,7 @@ module.exports = {
 
             if (error) {
                 throw createError({
-                    message: "Validate failed!",
+                    message: "Xác thực thất bại!",
                     data: error.details[0].message,
                 });
             }
@@ -125,14 +131,15 @@ module.exports = {
 
             if (!updateRoom) {
                 throw createError({
-                    message: "Update failed!",
+                    message: "Cập nhật thất bại!",
                     data: updateRoom,
                 });
             }
 
             return res.json({
                 status: 200,
-                data: updateRoom,
+                data: { updateRoom },
+                message: "Cập nhật thành công!",
             });
         } catch (error) {
             next(error);
@@ -148,13 +155,14 @@ module.exports = {
 
             if (!removeRoom)
                 throw createError({
-                    message: "Not find with id!",
+                    message: "Không tìm thấy phòng!",
                     data: removeRoom,
                 });
 
             return res.json({
                 status: 200,
-                data: removeRoom,
+                data: { removeRoom },
+                message: "Xóa thành công!",
             });
         } catch (error) {
             next(error);

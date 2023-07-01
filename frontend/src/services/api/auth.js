@@ -15,7 +15,7 @@ const headerConfigs = async (headers = {}) => {
     let { auth } = getState();
     return {
         ...headers,
-        Authorization: `Bearer ${auth.token}`,
+        Authorization: `Bearer ${auth.accessToken.token}`,
     };
 };
 
