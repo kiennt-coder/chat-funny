@@ -19,7 +19,7 @@ const Login = () => {
     }
 
     useEffect(() => {
-        accessToken && navigate("/chats")
+        accessToken?.token && navigate("/chats")
     }, [accessToken, navigate])
 
     return (

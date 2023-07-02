@@ -10,17 +10,21 @@ import setting from "../setting";
 const { LOCAL_STORAGE } = setting;
 
 const PrivateRouter = ({ children }) => {
-    const accessToken = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
+    const accessToken = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN)
+    );
 
-    return accessToken ? <>{children}</> : <Navigate to="/signin" />;
+    return accessToken?.token ? <>{children}</> : <Navigate to="/signin" />;
 };
 
 const PublicRouter = ({ children }) => {
-    const accessToken = localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN);
+    const accessToken = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE.ACCESS_TOKEN)
+    );
     const remember = localStorage.getItem(LOCAL_STORAGE.REMEMBER);
 
-    return accessToken && remember?.match("true") ? (
-        <Navigate to="/" />
+    return accessToken?.token && remember?.match("true") ? (
+        <Navigate to="/chats" />
     ) : (
         <>{children}</>
     );
