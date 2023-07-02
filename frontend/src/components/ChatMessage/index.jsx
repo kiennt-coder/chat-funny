@@ -31,7 +31,7 @@ const ChatMessage = ({message, align="left", ...props}) => {
 
                         <p className="time">
                             <ClockCircleOutlined />
-                            <span>22:02</span>
+                            <span>{message?.time ? message.time : "just now"}</span>
                         </p>
                     </div>
 

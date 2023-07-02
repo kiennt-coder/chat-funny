@@ -13,13 +13,13 @@ const signAccessToken = async (userId) => {
 
         // Create options
         const options = {
-            expiresIn: "5m",
+            expiresIn: "30m",
         };
 
         // Sign a new token
         JWT.sign(payload, secret, options, (err, token) => {
             if (err) reject(err);
-            resolve({ token, expired: Date.now() + (5 * 60 * 1000) });
+            resolve({ token, expired: Date.now() + 30 * 60 * 1000 });
         });
     });
 };

@@ -86,6 +86,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkO
 
 ### Get list message in room
 GET https://chat-funny-api.vercel.app/v1/rooms/6480ab72d065370c33f97510/messages
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODgzMTI4MzQsImV4cCI6MTY4ODMxMzEzNH0.w5GqFWKelVeKlM27WsboMgN2E8-EACDCMCxvPDnh1y0
 
 ### Get detail
 GET https://chat-funny-api.vercel.app/v1/rooms/6480ab72d065370c33f97510
@@ -95,14 +96,15 @@ GET https://chat-funny-api.vercel.app/v1/rooms/6480ab72d065370c33f97510
 
 POST https://chat-funny-api.vercel.app/v1/messages
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODgzMjEyOTksImV4cCI6MTY4ODMyMTU5OX0.WDvIgj7MO2QoM_N-Q-DpP-lmarNu_Tr9651RVHwimKk
 
 {
   "roomId": "6480ab72d065370c33f97510",
-  "userSendId": "647f891534103cb8cc779018",
-  "userReveiceId": "647f891534103cb8cc779018",
+  "userSendId": "649dcd8fd88aae8cadde54d1",
+  "userReveiceId": "6480ab1ed065370c33f9750c",
   "text": "Hello, World!",
   "files": [],
-  "isSeen": ["647f891534103cb8cc779018"]
+  "isSeen": ["649dcd8fd88aae8cadde54d1"]
 }
 
 ### Update

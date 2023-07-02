@@ -20,6 +20,21 @@ const config = {
             message.error(setting.MESSAGES.DEFAULT);
         }
     },
+    GetMessages: async (payload) => {
+        try {
+            let res = await apiGetAuth(
+                `${config.GET_LIST}/${payload?.roomId}/messages`
+            );
+
+            const { status } = res;
+            if (status === 200) {
+                message.success(res.message);
+                return res.data;
+            }
+        } catch (error) {
+            message.error(setting.MESSAGES.DEFAULT);
+        }
+    },
 };
 
 export default config;

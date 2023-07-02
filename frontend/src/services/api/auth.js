@@ -1,4 +1,4 @@
-import { getState } from "../store";
+import store, { getState } from "../store";
 import instance, { apiDelete, apiGet, apiPatch, apiPost, apiPut } from ".";
 import configLogin from "../../pages/login/config";
 import { message } from "antd";
@@ -31,7 +31,7 @@ instance.interceptors.request.use(async (config) => {
                     setting.LOCAL_STORAGE.REFRESH_TOKEN,
                     JSON.stringify(res.refreshToken)
                 );
-                refreshTokenFulfilled(res);
+                store.dispatch(refreshTokenFulfilled(res));
             }
         } catch (err) {
             message.error(setting.MESSAGES.DEFAULT);

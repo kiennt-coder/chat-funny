@@ -1,4 +1,4 @@
-// import { useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import
     ChatDetailWrapper,
     {
@@ -9,7 +9,8 @@ import
         ChatDetailStatus
     }
 from "./styled"
-import { Suspense, memo } from "react"
+import { Suspense, memo, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import LoadingComponent from "../LoadingComponent"
 import { Avatar, Input, Tooltip } from "../uiElements"
 import {
@@ -24,13 +25,25 @@ import {
     EllipsisOutlined
 } from "@ant-design/icons"
 import ChatMessage from "../ChatMessage"
+import { getList } from "../../services/store/message/slice"
+import dayjs from "dayjs"
 
 const ChatDetail = ({...props}) => {
-    // const params = useParams()
+    const params = useParams()
+    const dispatch = useDispatch()
+    const {
+        auth: {user},
+        room: {rooms},
+        message: {messages}
+    } = useSelector(state => state)
 
-    // const {id} = params
+    const {id} = params
 
-    // console.log(id, "id")
+    useEffect(() => {
+        if(id && !messages.find(item => item.roomId === id)) {
+            dispatch(getList({roomId: id}))
+        }
+    }, [id, messages, dispatch])
 
     const listHeaderIcons = [
         {
@@ -78,6 +91,22 @@ const ChatDetail = ({...props}) => {
         ))
     }
 
+    const renderMessages = list => list.map((item, index) => {
+        let userInfo = rooms.find(room => room._id === id)?.users?.find(user => user._id === item.userSendId)
+        return (
+            <ChatMessage
+                key={index}
+                align={user?._id === item.userSendId ? "right" : "left"}
+                message={{
+                    avatar: (list[index+1]?.userSendId === item.userSendId ? "" : "avatar"),
+                    text: item.text,
+                    username: (list[index+1]?.userSendId === item.userSendId ? "" : userInfo?.nickname),
+                    time: dayjs(item.createdAt).format("HH:mm")
+                }}
+            />
+        )
+    })
+
     return (
         <Suspense fallback={<LoadingComponent />}>
             <ChatDetailWrapper {...props}>
@@ -96,7 +125,10 @@ const ChatDetail = ({...props}) => {
                 </ChatDetailHeader>
 
                 <ChatDetailBody>
-                    <ChatMessage message={{
+                    {
+                        renderMessages(messages)
+                    }
+                    {/* <ChatMessage message={{
                         text: "Hello, World!"
                     }} />
                     <ChatMessage message={{
@@ -123,7 +155,7 @@ const ChatDetail = ({...props}) => {
                             username: "Kiennt",
                             text: "Hi"
                         }}
-                    />
+                    /> */}
                 </ChatDetailBody>
 
                 <ChatDetailFooter>

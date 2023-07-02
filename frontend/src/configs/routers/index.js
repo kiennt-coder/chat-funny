@@ -46,11 +46,12 @@ const routes = createBrowserRouter([
                     {
                         path: "chats/*",
                         element: <Chat />,
-                        // children: [
-                        //     {
-                        //         path: ":id",
-                        //     },
-                        // ],
+                        children: [
+                            {
+                                path: ":id",
+                                element: <Chat />,
+                            },
+                        ],
                     },
                 ],
             },
