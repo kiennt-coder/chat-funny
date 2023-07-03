@@ -1,10 +1,11 @@
 import { Avatar } from "../uiElements"
 import { MoreOutlined, ClockCircleOutlined } from "@ant-design/icons"
 import ChatMessageWrapper, { ChatMessageAvatar, ChatMessageContent } from "./styled"
+import { forwardRef } from "react"
 
-const ChatMessage = ({message, align="left", ...props}) => {
+const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
     return (
-        <ChatMessageWrapper {...props} align={align}>
+        <ChatMessageWrapper {...props} align={align} ref={ref}>
             <ChatMessageAvatar align={align}>
                 {
                     message?.avatar ? 
@@ -49,6 +50,6 @@ const ChatMessage = ({message, align="left", ...props}) => {
             </ChatMessageContent>
         </ChatMessageWrapper>
     )
-}
+})
 
 export default ChatMessage

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     rooms: [],
+    activeRoom: "",
     loading: false,
 };
 
@@ -22,8 +23,14 @@ export const roomSlice = createSlice({
             ...state,
             loading: false,
         }),
+
+        updateActiveRoom: (state, { payload }) => ({
+            ...state,
+            activeRoom: payload.activeRoom,
+        }),
     },
 });
 
-export const { getList, getListFulfilled, getListRejected } = roomSlice.actions;
+export const { getList, getListFulfilled, getListRejected, updateActiveRoom } =
+    roomSlice.actions;
 export default roomSlice.reducer;

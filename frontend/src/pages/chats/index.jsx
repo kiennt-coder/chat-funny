@@ -6,15 +6,19 @@ import ChatBox from "./components/ChatBox"
 import ChatItem from "./components/ChatItem"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { getList } from "../../services/store/room/slice"
+import { getList, updateActiveRoom } from "../../services/store/room/slice"
 
 const Chats = () => {
     const dispatch = useDispatch()
-    const {rooms} = useSelector(state => state.room)
+    const {rooms, activeRoom} = useSelector(state => state.room)
+
+    const handleChangeActiveRoom = (roomId) => {
+        activeRoom !== roomId && dispatch(updateActiveRoom({activeRoom: roomId}))
+    }
 
     const renderRooms = (list=[]) => {
         return list.map((item, index) => (
-            <ChatItem key={index} to={item._id} room={item} />
+            <ChatItem key={index} to={item._id} room={item} onClick={() => handleChangeActiveRoom(item._id)} />
         ))
     }
 

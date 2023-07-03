@@ -1,10 +1,11 @@
 import { message } from "antd";
 import setting from "../../configs/setting";
-import { apiGetAuth } from "../../services/api/auth";
+import { apiGetAuth, apiPostAuth } from "../../services/api/auth";
 
 const config = {
     // URL
     GET_LIST: `${setting.API_URL}rooms`,
+    CREATE_MESSAGE: `${setting.API_URL}messages`,
 
     // Action
     GetList: async (payload) => {
@@ -25,6 +26,19 @@ const config = {
             let res = await apiGetAuth(
                 `${config.GET_LIST}/${payload?.roomId}/messages`
             );
+
+            const { status } = res;
+            if (status === 200) {
+                message.success(res.message);
+                return res.data;
+            }
+        } catch (error) {
+            message.error(setting.MESSAGES.DEFAULT);
+        }
+    },
+    CreateMessage: async (payload) => {
+        try {
+            let res = await apiPostAuth(config.CREATE_MESSAGE, payload);
 
             const { status } = res;
             if (status === 200) {

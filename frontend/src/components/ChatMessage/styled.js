@@ -86,10 +86,7 @@ export const ChatMessageContent = styled.div`
                 font-size: ${size("text-medium")};
                 margin-bottom: ${size("margin-2")};
                 line-height: 1.6;
-                ${({ align }) =>
-                    align === "right"
-                        ? `text-align: left;`
-                        : `text-align: right;`}
+                text-align: left;
             }
 
             & .time {

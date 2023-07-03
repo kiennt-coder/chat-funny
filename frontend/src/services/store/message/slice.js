@@ -22,9 +22,29 @@ export const messageSlice = createSlice({
             ...state,
             loading: false,
         }),
+
+        createMessage: (state) => ({
+            ...state,
+            loading: true,
+        }),
+        createMessageFulfilled: (state, { payload }) => ({
+            ...state,
+            messages: [...state.messages, payload.savedMessage],
+            loading: false,
+        }),
+        createMessageRejected: (state) => ({
+            ...state,
+            loading: false,
+        }),
     },
 });
 
-export const { getList, getListFulfilled, getListRejected } =
-    messageSlice.actions;
+export const {
+    getList,
+    getListFulfilled,
+    getListRejected,
+    createMessage,
+    createMessageFulfilled,
+    createMessageRejected,
+} = messageSlice.actions;
 export default messageSlice.reducer;

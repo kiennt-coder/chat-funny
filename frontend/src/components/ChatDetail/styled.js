@@ -114,12 +114,30 @@ export const ChatDetailFooter = styled(ChatDetailBox)`
     border-bottom: unset;
     border-top: 0.1rem solid ${palette("secondary", 4)};
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.4rem;
+    & form#formAddMessage {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.4rem;
+    }
 
-    & > .anticon {
+    & .ant-form-item {
+        margin-inline-end: unset;
+        text-align: center;
+    }
+
+    & .form__input {
+        flex: 1;
+    }
+
+    & .form__action {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.4rem;
+    }
+
+    & .form__action--icon .anticon {
         padding: ${size("text-small")};
         color: ${palette("primary", 0)};
         cursor: pointer;
@@ -130,6 +148,10 @@ export const ChatDetailFooter = styled(ChatDetailBox)`
             background-color: rgb(${palette("rgb", 1)});
             border-radius: ${size("radius")};
         }
+    }
+
+    & .form__btn--submit .ant-btn {
+        padding: calc(${size("padding-2")} + 0.21875rem) ${size("padding-3")};
     }
 `;
 

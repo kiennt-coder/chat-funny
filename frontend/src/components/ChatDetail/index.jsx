@@ -1,4 +1,3 @@
-import { useParams } from "react-router-dom"
 import
     ChatDetailWrapper,
     {
@@ -9,10 +8,11 @@ import
         ChatDetailStatus
     }
 from "./styled"
-import { Suspense, memo, useEffect } from "react"
+import { Suspense, memo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import LoadingComponent from "../LoadingComponent"
-import { Avatar, Input, Tooltip } from "../uiElements"
+import { Avatar, Form, FormItem, Input, Tooltip } from "../uiElements"
+import {Form as FormAnt} from "antd"
 import {
     SmileOutlined,
     PaperClipOutlined,
@@ -25,25 +25,28 @@ import {
     EllipsisOutlined
 } from "@ant-design/icons"
 import ChatMessage from "../ChatMessage"
-import { getList } from "../../services/store/message/slice"
+import { createMessage, getList } from "../../services/store/message/slice"
 import dayjs from "dayjs"
 
 const ChatDetail = ({...props}) => {
-    const params = useParams()
     const dispatch = useDispatch()
     const {
         auth: {user},
-        room: {rooms},
+        room: {rooms, activeRoom},
         message: {messages}
     } = useSelector(state => state)
-
-    const {id} = params
+    const [form] = FormAnt.useForm()
+    const [lastMessageEl, setLasMessageEl] = useState()
+    
+    useEffect(() => {
+        lastMessageEl && activeRoom.length && lastMessageEl.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+    }, [lastMessageEl, activeRoom])
 
     useEffect(() => {
-        if(id && !messages.find(item => item.roomId === id)) {
-            dispatch(getList({roomId: id}))
+        if(activeRoom.length && !messages.find(item => item.roomId === activeRoom)) {
+            dispatch(getList({roomId: activeRoom}))
         }
-    }, [id, messages, dispatch])
+    }, [activeRoom, messages, dispatch])
 
     const listHeaderIcons = [
         {
@@ -70,14 +73,17 @@ const ChatDetail = ({...props}) => {
 
     const listFooterIcons = [
         {
+            name: "emoji",
             title: "Biểu tượng cảm xúc",
             icon: <SmileOutlined />,
         },
         {
+            name: "file",
             title: "File đính kèm",
             icon: <PaperClipOutlined />,
         },
         {
+            name: "image",
             title: "Hình ảnh",
             icon: <PictureOutlined />,
         },
@@ -91,8 +97,18 @@ const ChatDetail = ({...props}) => {
         ))
     }
 
+    const renderFormItemIcons = listIcon => {
+        return listIcon.map((item, index) => (
+            <FormItem name={item.name} key={index} className="form__action--icon">
+                <Tooltip title={item.title}>
+                    {item.icon}
+                </Tooltip>
+            </FormItem>
+        ))
+    }
+
     const renderMessages = list => list.map((item, index) => {
-        let userInfo = rooms.find(room => room._id === id)?.users?.find(user => user._id === item.userSendId)
+        let userInfo = rooms.find(room => room._id === activeRoom)?.users?.find(user => user._id === item.userSendId)
         return (
             <ChatMessage
                 key={index}
@@ -103,9 +119,28 @@ const ChatDetail = ({...props}) => {
                     username: (list[index+1]?.userSendId === item.userSendId ? "" : userInfo?.nickname),
                     time: dayjs(item.createdAt).format("HH:mm")
                 }}
+                ref={element => index === list.length-1 && setLasMessageEl(element)}
             />
         )
     })
+
+    const handleSubmit = (values) => {
+
+        let room = rooms.find(room => room._id === activeRoom)
+
+        let data = {
+            roomId: room._id,
+            userSendId: user._id,
+            userReveiceId: room.users.find(item => item._id !== user._id)._id,
+            text: values.text,
+            files: [],
+            isSeen: [user._id],
+        }
+
+        dispatch(createMessage(data))
+
+        form.resetFields()
+    }
 
     return (
         <Suspense fallback={<LoadingComponent />}>
@@ -159,12 +194,32 @@ const ChatDetail = ({...props}) => {
                 </ChatDetailBody>
 
                 <ChatDetailFooter>
-                    <Input placeholder="Nhập tin nhắn..." />
-                    {renderIcons(listFooterIcons)}
+                    <Form
+                        form={form}
+                        name="formAddMessage"
+                        onFinish={handleSubmit}
+                        layout="inline"
+                        style={{width: "100%"}}
+                    >
+                        <FormItem
+                            name="text"
+                            className="form__input"
+                        >
+                            <Input placeholder="Nhập tin nhắn..." />
+                        </FormItem>
 
-                    <Tooltip title="Gửi tin nhắn">
-                        <ChatDetailSendBtn type="primary" icon={<SendOutlined />}></ChatDetailSendBtn>
-                    </Tooltip>
+                        {renderFormItemIcons(listFooterIcons)}
+  
+                        <FormItem className="form__btn--submit">
+                            <Tooltip title="Gửi tin nhắn">
+                                <ChatDetailSendBtn
+                                    type="primary"
+                                    htmlType="submit"
+                                    icon={<SendOutlined />}
+                                ></ChatDetailSendBtn>
+                            </Tooltip>
+                        </FormItem>
+                    </Form>
                 </ChatDetailFooter>
             </ChatDetailWrapper>
         </Suspense>
