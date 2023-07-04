@@ -9,6 +9,7 @@ export const messageSlice = createSlice({
     name: "message",
     initialState,
     reducers: {
+        // Get Messages
         getList: (state) => ({
             ...state,
             loading: true,
@@ -22,7 +23,7 @@ export const messageSlice = createSlice({
             ...state,
             loading: false,
         }),
-
+        // Create Message
         createMessage: (state) => ({
             ...state,
             loading: true,
@@ -36,6 +37,22 @@ export const messageSlice = createSlice({
             ...state,
             loading: false,
         }),
+        // Delete Message
+        deleteMessage: (state) => ({
+            ...state,
+            loading: true,
+        }),
+        deleteMessageFulfilled: (state, { payload }) => ({
+            ...state,
+            messages: state.messages.filter(
+                (message) => message._id !== payload.removedMessage._id
+            ),
+            loading: false,
+        }),
+        deleteMessageRejected: (state) => ({
+            ...state,
+            loading: false,
+        }),
     },
 });
 
@@ -46,5 +63,8 @@ export const {
     createMessage,
     createMessageFulfilled,
     createMessageRejected,
+    deleteMessage,
+    deleteMessageFulfilled,
+    deleteMessageRejected,
 } = messageSlice.actions;
 export default messageSlice.reducer;

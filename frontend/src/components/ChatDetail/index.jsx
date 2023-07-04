@@ -8,11 +8,11 @@ import
         ChatDetailStatus
     }
 from "./styled"
-import { Suspense, memo, useEffect, useState } from "react"
+import { Suspense, createRef, memo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import LoadingComponent from "../LoadingComponent"
 import { Avatar, Form, FormItem, Input, Tooltip } from "../uiElements"
-import {Form as FormAnt} from "antd"
+import {Form as FormAnt, Popover} from "antd"
 import {
     SmileOutlined,
     PaperClipOutlined,
@@ -27,6 +27,7 @@ import {
 import ChatMessage from "../ChatMessage"
 import { createMessage, getList } from "../../services/store/message/slice"
 import dayjs from "dayjs"
+import EmojiPicker from "emoji-picker-react"
 
 const ChatDetail = ({...props}) => {
     const dispatch = useDispatch()
@@ -35,18 +36,27 @@ const ChatDetail = ({...props}) => {
         room: {rooms, activeRoom},
         message: {messages}
     } = useSelector(state => state)
+    const emojiPickerRef = createRef()
     const [form] = FormAnt.useForm()
     const [lastMessageEl, setLasMessageEl] = useState()
     
     useEffect(() => {
-        lastMessageEl && activeRoom.length && lastMessageEl.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"})
+        lastMessageEl &&
+        activeRoom.length &&
+        lastMessageEl.scrollIntoView({
+            behavior: "smooth", block: "end", inline: "nearest"
+        })
     }, [lastMessageEl, activeRoom])
 
     useEffect(() => {
+        handleGetMessages()
+    }, [activeRoom])
+
+    function handleGetMessages() {
         if(activeRoom.length && !messages.find(item => item.roomId === activeRoom)) {
             dispatch(getList({roomId: activeRoom}))
         }
-    }, [activeRoom, messages, dispatch])
+    }
 
     const listHeaderIcons = [
         {
@@ -75,7 +85,12 @@ const ChatDetail = ({...props}) => {
         {
             name: "emoji",
             title: "Biểu tượng cảm xúc",
-            icon: <SmileOutlined />,
+            icon: (<Popover
+                content={<EmojiPicker ref={emojiPickerRef} onEmojiClick={handleEmojiClick} />}
+                trigger="click"
+                >
+                <SmileOutlined />
+            </Popover>),
         },
         {
             name: "file",
@@ -114,6 +129,7 @@ const ChatDetail = ({...props}) => {
                 key={index}
                 align={user?._id === item.userSendId ? "right" : "left"}
                 message={{
+                    id: item._id,
                     avatar: (list[index+1]?.userSendId === item.userSendId ? "" : "avatar"),
                     text: item.text,
                     username: (list[index+1]?.userSendId === item.userSendId ? "" : userInfo?.nickname),
@@ -142,6 +158,11 @@ const ChatDetail = ({...props}) => {
         form.resetFields()
     }
 
+    function handleEmojiClick (emojiData) {
+        let oldText = form.getFieldValue("text") || ""
+        form.setFieldValue("text", oldText + emojiData.emoji)
+    }
+
     return (
         <Suspense fallback={<LoadingComponent />}>
             <ChatDetailWrapper {...props}>
@@ -163,34 +184,6 @@ const ChatDetail = ({...props}) => {
                     {
                         renderMessages(messages)
                     }
-                    {/* <ChatMessage message={{
-                        text: "Hello, World!"
-                    }} />
-                    <ChatMessage message={{
-                        text: "Hello, World!"
-                    }} />
-                    <ChatMessage message={{
-                        text: "Hello, World!"
-                    }} />
-                    <ChatMessage message={{
-                        avatar: "K",
-                        username: "Kiennt",
-                        text: "Hello, World!"
-                    }} />
-                    <ChatMessage align="right" message={{
-                        text: "Hello, World!"
-                    }} />
-                    <ChatMessage align="right" message={{
-                        text: "Hello, World!"
-                    }} />
-                    <ChatMessage
-                        align="right"
-                        message={{
-                            avatar: "K",
-                            username: "Kiennt",
-                            text: "Hi"
-                        }}
-                    /> */}
                 </ChatDetailBody>
 
                 <ChatDetailFooter>
@@ -209,7 +202,7 @@ const ChatDetail = ({...props}) => {
                         </FormItem>
 
                         {renderFormItemIcons(listFooterIcons)}
-  
+                        
                         <FormItem className="form__btn--submit">
                             <Tooltip title="Gửi tin nhắn">
                                 <ChatDetailSendBtn

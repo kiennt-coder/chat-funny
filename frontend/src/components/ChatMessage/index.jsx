@@ -2,8 +2,39 @@ import { Avatar } from "../uiElements"
 import { MoreOutlined, ClockCircleOutlined } from "@ant-design/icons"
 import ChatMessageWrapper, { ChatMessageAvatar, ChatMessageContent } from "./styled"
 import { forwardRef } from "react"
+import MenuContext from "../MenuContext"
+import setting from "../../configs/setting"
+import { useDispatch } from "react-redux"
+import { deleteMessage } from "../../services/store/message/slice"
 
 const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
+    const dispatch = useDispatch()
+    const items = [
+        {
+            label: "Xoá",
+            key: "delete",
+        }
+    ]
+
+    const handleDeleteMessage = (id) => {
+        try {
+            id && dispatch(deleteMessage({id}))
+        } catch (error) {
+            message.error(setting.MESSAGES.DEFAULT)
+        }
+    }
+
+    const handleContextMenuClick = (value) => {
+        switch (value.key) {
+            case "delete":
+                handleDeleteMessage(message?.id)
+                break;
+        
+            default:
+                break;
+        }
+    }
+
     return (
         <ChatMessageWrapper {...props} align={align} ref={ref}>
             <ChatMessageAvatar align={align}>
@@ -37,7 +68,15 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
                     </div>
 
                     <div className="context-menu">
-                        <MoreOutlined />
+                        <MenuContext
+                            menu={{
+                                items,
+                                onClick: handleContextMenuClick
+                            }}
+                            placement={align && align.includes("right") ? "left" : "right"}
+                        >
+                            <MoreOutlined />
+                        </MenuContext>
                     </div>
                 </div>
 

@@ -6,6 +6,9 @@ import {
     createMessage,
     createMessageFulfilled,
     createMessageRejected,
+    deleteMessage,
+    deleteMessageFulfilled,
+    deleteMessageRejected,
 } from "./slice";
 import chatConfig from "../../../pages/chats/config";
 
@@ -29,7 +32,18 @@ function* createMessageSaga({ payload }) {
     }
 }
 
+function* deleteMessageSaga({ payload }) {
+    try {
+        const res = yield call(chatConfig.DeleteMessage, payload);
+        if (!res) yield put(deleteMessageRejected());
+        else yield put(deleteMessageFulfilled(res));
+    } catch (error) {
+        yield put(deleteMessageRejected());
+    }
+}
+
 export default function* mySaga() {
     yield takeLatest(getList.toString(), getListMessage);
     yield takeLatest(createMessage.toString(), createMessageSaga);
+    yield takeLatest(deleteMessage.toString(), deleteMessageSaga);
 }
