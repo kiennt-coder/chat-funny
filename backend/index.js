@@ -11,22 +11,36 @@ const roomRoute = require("./Routes/Room.router");
 const messageRoute = require("./Routes/Message.router");
 const fileRoute = require("./Routes/File.router");
 const errorLogEvents = require("./helpers/logEvents");
+const http = require("http");
+
+const allowlist = [
+    "http://localhost:3000",
+    "http://localhost:3000/",
+    "http://localhost:5500",
+    "http://localhost:5500/",
+    "http://172.0.0.1:3000",
+    "http://172.0.0.1:3000/",
+    "http://172.0.0.1:5500",
+    "http://172.0.0.1:5500/",
+    "https://chat-funny.vercel.app",
+    "https://chat-funny.vercel.app/",
+];
 
 // Create Express Application
 const app = express();
+const server = http.createServer(app);
+const { Server } = require("socket.io");
+const connectSocket = require("./services/socketIO");
+const io = new Server(server, {
+    cors: {
+        origin: allowlist,
+    },
+});
 
 // Change HTTP Headers
 app.use(helmet());
 
 // Cors
-const allowlist = [
-    "http://localhost:3000",
-    "http://localhost:3000/",
-    "http://172.0.0.1:3000",
-    "http://172.0.0.1:3000/",
-    "https://chat-funny.vercel.app",
-    "https://chat-funny.vercel.app/",
-];
 const corsOptionsDelegate = function (req, callback) {
     let corsOptions;
     if (allowlist.indexOf(req.header("Origin")) !== -1) {
@@ -82,10 +96,13 @@ app.use((err, req, res, next) => {
     });
 });
 
+// Socket.io
+io.on("connection", (socket) => connectSocket(io, socket));
+
 // Create port
 const PORT = process.env.PORT || 3001;
 
 // Listen port with Server running
-app.listen(PORT, function () {
+server.listen(PORT, function () {
     console.log(`Server is running with Port::${PORT}!`);
 });
