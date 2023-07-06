@@ -33,8 +33,7 @@ const { Server } = require("socket.io");
 const connectSocket = require("./services/socketIO");
 const io = new Server(server, {
     cors: {
-        origin: "http://172.0.0.1:5500",
-        credentials: true,
+        origin: allowlist,
     },
 });
 
