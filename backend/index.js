@@ -34,6 +34,7 @@ const connectSocket = require("./services/socketIO");
 const io = new Server(server, {
     cors: {
         origin: allowlist,
+        methods: ['GET', 'POST'],
         credentials: true
     },
 });
