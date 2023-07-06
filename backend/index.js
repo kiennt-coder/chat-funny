@@ -33,18 +33,7 @@ const { Server } = require("socket.io");
 const connectSocket = require("./services/socketIO");
 const io = new Server(server, {
     cors: {
-        origin: [
-    "http://localhost:3000",
-    "http://localhost:3000/",
-    "http://localhost:5500",
-    "http://localhost:5500/",
-    "http://172.0.0.1:3000",
-    "http://172.0.0.1:3000/",
-    "http://172.0.0.1:5500",
-    "http://172.0.0.1:5500/",
-    "https://chat-funny.vercel.app",
-    "https://chat-funny.vercel.app/",
-],
+        origin: "http://172.0.0.1:5500",
     },
 });
 
