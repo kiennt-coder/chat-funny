@@ -24,6 +24,8 @@ const allowlist = [
     "http://172.0.0.1:5500/",
     "https://chat-funny.vercel.app",
     "https://chat-funny.vercel.app/",
+    "https://chat-funny-dev.vercel.app",
+    "https://chat-funny-dev.vercel.app/",
 ];
 
 // Create Express Application
