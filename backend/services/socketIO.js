@@ -34,8 +34,8 @@ const connectSocket = (io, socket) => {
 
     // event user send message to the room
     socket.on("sendMessage", (data) => {
-        if (isHasRoom(data.room))
-            socket.to(data.room).emit("sendMessageSuccess", {
+        if (isHasRoom(data.roomId))
+            socket.to(data.roomId).emit("sendMessageSuccess", {
                 ...data,
             });
     });

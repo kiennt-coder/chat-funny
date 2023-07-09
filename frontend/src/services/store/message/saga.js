@@ -11,6 +11,7 @@ import {
     deleteMessageRejected,
 } from "./slice";
 import chatConfig from "../../../pages/chats/config";
+import { socket } from "../../socket";
 
 function* getListMessage({ payload }) {
     try {
@@ -26,7 +27,10 @@ function* createMessageSaga({ payload }) {
     try {
         const res = yield call(chatConfig.CreateMessage, payload);
         if (!res) yield put(createMessageRejected());
-        else yield put(createMessageFulfilled(res));
+        else {
+            socket.emit("sendMessage", res.savedMessage);
+            yield put(createMessageFulfilled(res));
+        }
     } catch (error) {
         yield put(createMessageRejected());
     }

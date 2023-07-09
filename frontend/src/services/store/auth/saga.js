@@ -16,6 +16,7 @@ import {
 import configLogin from "../../../pages/login/config";
 import configRegister from "../../../pages/register/config";
 import setting from "../../../configs/setting";
+import { socket } from "../../socket";
 
 const { LOCAL_STORAGE } = setting;
 
@@ -35,6 +36,7 @@ function* loginUser({ payload }) {
                 JSON.stringify(res.refreshToken)
             );
             localStorage.setItem(LOCAL_STORAGE.REMEMBER, remember);
+            socket.emit("joinRoom", res.user);
             yield put(
                 loginFulfilled({
                     ...res,

@@ -25,9 +25,10 @@ import {
     EllipsisOutlined
 } from "@ant-design/icons"
 import ChatMessage from "../ChatMessage"
-import { createMessage, getList } from "../../services/store/message/slice"
+import { createMessage, createMessageFulfilled, getList } from "../../services/store/message/slice"
 import dayjs from "dayjs"
 import EmojiPicker from "emoji-picker-react"
+import { socket } from "../../services/socket"
 
 const ChatDetail = ({...props}) => {
     const dispatch = useDispatch()
@@ -39,6 +40,16 @@ const ChatDetail = ({...props}) => {
     const emojiPickerRef = createRef()
     const [form] = FormAnt.useForm()
     const [lastMessageEl, setLasMessageEl] = useState()
+
+    useEffect(() => {
+        socket.on("sendMessageSuccess", (data) => {
+           dispatch(createMessageFulfilled({savedMessage: data}))
+        })
+
+        return () => {
+            socket.off("sendMessageSucccess")
+        }
+    }, [])
     
     useEffect(() => {
         lastMessageEl &&
