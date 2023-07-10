@@ -35,12 +35,11 @@ Content-Type: application/json
 
 ### Update
 
-PATCH https://chat-funny-api.vercel.app/v1/users/6480ab1ed065370c33f9750c
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODYxNTQzNzcsImV4cCI6MTY4NjE1NDY3N30.CSxNbDcw2iulCy_Pnk6nyWRBbmb769MRX7LP21Y4a9w
+PATCH https://chat-funny-api.vercel.app/v1/users/649dcd8fd88aae8cadde54d1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlkY2Q4ZmQ4OGFhZThjYWRkZTU0ZDEiLCJpYXQiOjE2ODkwMTY1NjksImV4cCI6MTY4OTAxODM2OX0.kWY5Pmcj2eEZUhrXzIlV9_q-qdKiHgeQOT-ONKnahCw
 Content-Type: application/json
 
 {
-    "nickname": "Ngô Trung Kiên",
     "rooms": ["6480ab72d065370c33f97510"]
 }
 

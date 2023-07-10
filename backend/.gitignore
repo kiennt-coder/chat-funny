@@ -4,5 +4,5 @@ node_modules/
 #Logs/
 
 # Ignore .env files
-.env
-.env.*
+# .env
+# .env.*

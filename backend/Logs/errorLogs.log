@@ -37,3 +37,5 @@ Use mongoose.model(name, schema)
 10-07-2023	00:57:38-----/v1/users/login---POST---401---Mật khẩu sai!
 10-07-2023	01:02:47-----/v1/users/login---POST---401---Tài khoản không tồn tại!
 10-07-2023	01:02:52-----/v1/users/login---POST---401---Tài khoản không tồn tại!
+11-07-2023	01:19:40-----/v1/messages/64ac49f47fef1f95573dbfe0---DELETE---500---Không tìm thấy!
+11-07-2023	01:50:25-----/v1/messages/64ac5271ae83078adf4dc81f---DELETE---500---Không tìm thấy!

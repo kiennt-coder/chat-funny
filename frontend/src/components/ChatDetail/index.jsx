@@ -42,14 +42,18 @@ const ChatDetail = ({...props}) => {
     const [lastMessageEl, setLasMessageEl] = useState()
 
     useEffect(() => {
+        console.log("socket::", socket.id)
+
+        socket.on("joinRoomSuccess", (data) => {
+            console.log("join room success")
+        })
+
         socket.on("sendMessageSuccess", (data) => {
            dispatch(createMessageFulfilled({savedMessage: data}))
         })
 
-        return () => {
-            socket.off("sendMessageSucccess")
-        }
-    }, [])
+        
+    }, [socket.id])
     
     useEffect(() => {
         lastMessageEl &&

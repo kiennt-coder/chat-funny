@@ -4,27 +4,12 @@ let rooms = [];
 const isHasRoom = (room) => rooms.find((item) => item === room);
 
 const connectSocket = (io, socket) => {
-    users.push({
-        socketId: socket.id,
-    });
-
     // event user join the room
     socket.on("joinRoom", (data) => {
-        users = users.map((user) => {
-            let newUser =
-                user.socketId === socket.id
-                    ? {
-                          ...user,
-                          ...data,
-                      }
-                    : {
-                          ...user,
-                      };
-
-            return newUser;
-        });
+        users.push(data);
         rooms = rooms.concat(data.rooms);
-        rooms.push([...new Set(rooms)]);
+        rooms = [...new Set(rooms)];
+        console.log("socketId::", socket.id);
         socket.join(data.rooms);
         socket.to(data.rooms).emit("newUserJoinRoom", { ...data });
         socket.emit("joinRoomSuccess", {
@@ -34,23 +19,20 @@ const connectSocket = (io, socket) => {
 
     // event user send message to the room
     socket.on("sendMessage", (data) => {
-        if (isHasRoom(data.roomId))
-            socket.to(data.roomId).emit("sendMessageSuccess", {
-                ...data,
-            });
+        console.log("socketId::", socket.id);
+        console.log("data::", data);
+        socket.to(data.roomId).emit("sendMessageSuccess", {
+            ...data,
+        });
     });
 
     // event user leave the room
     socket.on("leaveRoom", (data) => {
-        let room = isHasRoom(data.room);
-        let user = users.find((user) => user.socketId === socket.id);
-        if (room) {
-            socket.leave(room);
-            io.to(room).emit(`user ${user.name} has left the room`);
-            socket.emit("leaveRoomSuccess", {
-                ...data,
-            });
-        }
+        socket.leave(data.roomId);
+        io.to(data.roomId).emit(`user ${data.user._id} has left the room`);
+        socket.emit("leaveRoomSuccess", {
+            ...data,
+        });
     });
 
     // event user disconnect
