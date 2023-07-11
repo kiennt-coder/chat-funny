@@ -29,6 +29,7 @@ module.exports = {
             const user = new User({
                 username,
                 password,
+                nickname: username,
             });
 
             // Save user in db

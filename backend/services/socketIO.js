@@ -9,7 +9,6 @@ const connectSocket = (io, socket) => {
         users.push(data);
         rooms = rooms.concat(data.rooms);
         rooms = [...new Set(rooms)];
-        console.log("socketId::", socket.id);
         socket.join(data.rooms);
         socket.to(data.rooms).emit("newUserJoinRoom", { ...data });
         socket.emit("joinRoomSuccess", {
@@ -19,8 +18,6 @@ const connectSocket = (io, socket) => {
 
     // event user send message to the room
     socket.on("sendMessage", (data) => {
-        console.log("socketId::", socket.id);
-        console.log("data::", data);
         socket.to(data.roomId).emit("sendMessageSuccess", {
             ...data,
         });

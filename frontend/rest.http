@@ -35,12 +35,13 @@ Content-Type: application/json
 
 ### Update
 
-PATCH https://chat-funny-api.vercel.app/v1/users/649dcd8fd88aae8cadde54d1
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDlkY2Q4ZmQ4OGFhZThjYWRkZTU0ZDEiLCJpYXQiOjE2ODkwMTY1NjksImV4cCI6MTY4OTAxODM2OX0.kWY5Pmcj2eEZUhrXzIlV9_q-qdKiHgeQOT-ONKnahCw
+PATCH https://chat-funny-api.vercel.app/v1/users/64ad7ed3fd66df6139d7c903
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFkN2VkM2ZkNjZkZjYxMzlkN2M5MDMiLCJpYXQiOjE2ODkwOTE4MDIsImV4cCI6MTY4OTA5MzYwMn0.XyzXjybMPSrhwolEGUnnDaV6dsyVcfmDoCp5gFDqqPI
 Content-Type: application/json
 
 {
-    "rooms": ["6480ab72d065370c33f97510"]
+    "rooms": ["6480ab72d065370c33f97510"],
+    "nickname": "Lộc Sơn"
 }
 
 ### Logout
@@ -66,13 +67,14 @@ Content-Type: application/json
 
 ### Update
 PATCH https://chat-funny-api.vercel.app/v1/rooms/6480ab72d065370c33f97510
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFkN2VkM2ZkNjZkZjYxMzlkN2M5MDMiLCJpYXQiOjE2ODkwOTI0MzYsImV4cCI6MTY4OTA5NDIzNn0.j-9DreCAQYvgij0xNdhdGQXFEAprjKddk_Vu4UJ7hFY
 Content-Type: application/json
 
 {
   "avatar": "https://kiennt.ga",
-  "name": "update group",
+  "name": "Học socket.io",
   "type": 1,
-  "users": ["6480ab1ed065370c33f9750c"]
+  "users": ["6480ab1ed065370c33f9750c", "649dcd8fd88aae8cadde54d1", "64ad7ed3fd66df6139d7c903"]
 }
 
 ### Delete

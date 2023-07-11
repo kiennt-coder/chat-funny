@@ -29,6 +29,7 @@ import { createMessage, createMessageFulfilled, getList } from "../../services/s
 import dayjs from "dayjs"
 import EmojiPicker from "emoji-picker-react"
 import { socket } from "../../services/socket"
+import setting from "../../configs/setting"
 
 const ChatDetail = ({...props}) => {
     const dispatch = useDispatch()
@@ -39,21 +40,17 @@ const ChatDetail = ({...props}) => {
     } = useSelector(state => state)
     const emojiPickerRef = createRef()
     const [form] = FormAnt.useForm()
+    const [roomDetail, setRoomDetail] = useState()
     const [lastMessageEl, setLasMessageEl] = useState()
 
     useEffect(() => {
-        console.log("socket::", socket.id)
-
-        socket.on("joinRoomSuccess", (data) => {
-            console.log("join room success")
-        })
+        let user = JSON.parse(localStorage.getItem(setting.LOCAL_STORAGE.USER))
+        socket.emit("joinRoom", user);
 
         socket.on("sendMessageSuccess", (data) => {
            dispatch(createMessageFulfilled({savedMessage: data}))
         })
-
-        
-    }, [socket.id])
+    }, [])
     
     useEffect(() => {
         lastMessageEl &&
@@ -64,6 +61,8 @@ const ChatDetail = ({...props}) => {
     }, [lastMessageEl, activeRoom])
 
     useEffect(() => {
+        let room = rooms.find(room => room._id === activeRoom)
+        setRoomDetail(room)
         handleGetMessages()
     }, [activeRoom])
 
@@ -183,9 +182,17 @@ const ChatDetail = ({...props}) => {
             <ChatDetailWrapper {...props}>
                 <ChatDetailHeader>
                     <div className="left">
-                        <Avatar>K</Avatar>
+                        <Avatar>
+                            {
+                                roomDetail && roomDetail.type ?
+                                roomDetail.name?.slice(0, 1)?.toUpperCase() : roomDetail?.users[0]?.nickname?.slice(0, 1)?.toUpperCase()
+                            }
+                        </Avatar>
                         <span className="name">
-                            Kiên Trung Ngô
+                            {
+                                roomDetail && roomDetail.type ?
+                                roomDetail.name : roomDetail?.users[0]?.nickname
+                            }
                         </span>
                         <ChatDetailStatus status="online" />
                     </div>

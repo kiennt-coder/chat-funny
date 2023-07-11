@@ -53,7 +53,7 @@ const routes = createBrowserRouter([
                         children: [
                             {
                                 path: ":id",
-                                element: <Chat />,
+                                element: <div></div>,
                             },
                         ],
                     },

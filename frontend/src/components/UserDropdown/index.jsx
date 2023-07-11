@@ -45,7 +45,7 @@ const UserDropdown = ({...props}) => {
                 trigger={['click', 'contextMenu']}
             >
                 <Avatar ref={avatarRef} className="dropdown__avatar">
-                    {user?.nickname?.slice(0, 1)}
+                    {user?.nickname?.slice(0, 1)?.toUpperCase()}
                 </Avatar>
             </Dropdown>
         </UserDropdownWrapper>

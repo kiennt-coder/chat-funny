@@ -7,6 +7,7 @@ import ChatItem from "./components/ChatItem"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getList, updateActiveRoom } from "../../services/store/room/slice"
+import { Outlet } from "react-router-dom"
 
 const Chats = () => {
     const dispatch = useDispatch()
@@ -38,6 +39,7 @@ const Chats = () => {
                 {
                     renderRooms(rooms)
                 }
+                <Outlet />
             </ChatBox>
         </PageWrapper>
     )
