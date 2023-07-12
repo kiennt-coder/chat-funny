@@ -2,6 +2,7 @@ const createError = require("http-errors");
 const { User } = require("../Models/User.model");
 const { userValidate } = require("../helpers/validation");
 const { signAccessToken, signRefreshToken } = require("../helpers/jwt_service");
+const { Room } = require("../Models/Room.model");
 
 module.exports = {
     // Register
@@ -179,6 +180,31 @@ module.exports = {
                 status: 200,
                 data: { detailUser },
                 message: "Lấy thông tin thành công!",
+            });
+        } catch (error) {
+            next(error);
+        }
+    },
+
+    // Get list room of user
+    getRooms: async (req, res, next) => {
+        try {
+            const { id } = req.params;
+
+            const rooms = await Room.find({
+                users: "6480ab1ed065370c33f9750c",
+            });
+
+            if (!rooms)
+                throw createError({
+                    message: "Không tìm thấy phòng nào!",
+                    data: rooms,
+                });
+
+            return res.json({
+                status: 200,
+                data: { rooms },
+                message: "Lấy danh sách phòng thành công!",
             });
         } catch (error) {
             next(error);

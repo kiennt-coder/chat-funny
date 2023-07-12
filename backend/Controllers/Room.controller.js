@@ -7,7 +7,17 @@ module.exports = {
     // Get list
     getList: async (req, res, next) => {
         try {
-            const rooms = await Room.find().populate("users", "nickname");
+            let filterQuery = { ...req.query };
+            if (filterQuery.type) {
+                filterQuery.type = filterQuery.type.includes("true")
+                    ? true
+                    : false;
+            }
+
+            const rooms = await Room.find(filterQuery).populate(
+                "users",
+                "nickname"
+            );
 
             return res.json({
                 status: 200,

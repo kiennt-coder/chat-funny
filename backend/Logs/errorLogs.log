@@ -41,3 +41,25 @@ Use mongoose.model(name, schema)
 11-07-2023	01:50:25-----/v1/messages/64ac5271ae83078adf4dc81f---DELETE---500---Không tìm thấy!
 11-07-2023	23:21:01-----/v1/messages/64ad7fcafd66df6139d7c916---DELETE---500---Không tìm thấy!
 11-07-2023	23:21:01-----/v1/messages/64ad7fcafd66df6139d7c916---DELETE---500---Không tìm thấy!
+12-07-2023	23:54:43-----/v1/user/6480ab1ed065370c33f9750c---GET---404---This route is not exists!
+12-07-2023	23:55:08-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:10:01-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:10:06-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:10:11-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:10:21-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:10:53-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:11:20-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:11:55-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---Cast to boolean failed for value "6480ab1ed065370c33f9750c" (type string) at path "users" for model "Room"
+13-07-2023	00:13:18-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---Cast to boolean failed for value "[ '6480ab1ed065370c33f9750c' ]" (type Array) at path "users" for model "Room"
+13-07-2023	00:16:26-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:16:45-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---Cast to boolean failed for value "[ undefined ]" (type Array) at path "users" for model "Room"
+13-07-2023	00:17:05-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---500---Không tìm thấy phòng nào!
+13-07-2023	00:18:22-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---Cast to boolean failed for value "6480ab1ed065370c33f9750c" (type string) at path "users" for model "Room"
+13-07-2023	00:28:19-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---401---jwt expired
+13-07-2023	00:28:43-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---rooms is not defined
+13-07-2023	00:29:25-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---rooms is not defined
+13-07-2023	00:32:58-----/v1/users/6480ab1ed065370c33f9750c/rooms---GET---undefined---Cast to boolean failed for value "6480ab1ed065370c33f9750c" (type string) at path "users" for model "Room"
+13-07-2023	00:45:55-----/v1/rooms?type=false---GET---undefined---type.contains is not a function
+13-07-2023	00:47:25-----/v1/rooms?---GET---undefined---Cannot read properties of undefined (reading 'includes')
+13-07-2023	00:51:06-----/v1/rooms?type=true---GET---undefined---query is not defined
+13-07-2023	00:55:13-----/v1/rooms?type=true&users=6480ab1ed065370c33f9750---GET---undefined---Cast to ObjectId failed for value "6480ab1ed065370c33f9750" (type string) at path "users" for model "Room"
