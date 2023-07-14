@@ -153,6 +153,10 @@ export const ChatDetailFooter = styled(ChatDetailBox)`
     & .form__btn--submit .ant-btn {
         padding: calc(${size("padding-2")} + 0.21875rem) ${size("padding-3")};
     }
+
+    & .ant-upload-list {
+        display: none;
+    }
 `;
 
 export const ChatDetailSendBtn = styled(Button)`

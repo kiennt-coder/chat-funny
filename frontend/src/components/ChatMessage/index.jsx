@@ -35,6 +35,8 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
         }
     }
 
+    console.log("message::", {message})
+
     return (
         <ChatMessageWrapper {...props} align={align} ref={ref}>
             <ChatMessageAvatar align={align}>
@@ -59,6 +61,7 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
                     <div className="detail">
                         <p className="text">
                             {message?.text ? message.text : ""}
+                            {message?.files && (<p>File: {message?.files[0]?.name}</p>)}
                         </p>
 
                         <p className="time">

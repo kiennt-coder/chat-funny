@@ -10,6 +10,7 @@ const userRoute = require("./Routes/User.router");
 const roomRoute = require("./Routes/Room.router");
 const messageRoute = require("./Routes/Message.router");
 const fileRoute = require("./Routes/File.router");
+const uploadRoute = require("./Routes/Upload.router");
 const errorLogEvents = require("./helpers/logEvents");
 const http = require("http");
 
@@ -36,9 +37,12 @@ const connectSocket = require("./services/socketIO");
 const io = new Server(server, {
     cors: {
         origin: allowlist,
-        credentials: true
+        credentials: true,
     },
 });
+
+// public folder
+app.use("/public", express.static(path.join(__dirname, "public")));
 
 // Change HTTP Headers
 app.use(helmet());
@@ -82,6 +86,9 @@ app.use("/v1/messages", messageRoute);
 
 // Create route file
 app.use("/v1/files", fileRoute);
+
+// Create route upload
+app.use("/v1/upload", uploadRoute);
 
 // Create function handle error not found
 app.use((req, res, next) => {

@@ -11,6 +11,8 @@ const config = {
     GET_LIST: `${setting.API_URL}rooms`,
     CREATE_MESSAGE: `${setting.API_URL}messages`,
     DELETE_MESSAGE: `${setting.API_URL}messages`,
+    CREATE_FILE: `${setting.API_URL}files`,
+    UPLOAD: `${setting.API_URL}upload`,
 
     // Action
     GetList: async (payload) => {
@@ -59,6 +61,34 @@ const config = {
             let res = await apiDeleteAuth(
                 `${config.DELETE_MESSAGE}/${payload.id}`
             );
+
+            const { status } = res;
+            if (status === 200) {
+                message.success(res.message);
+                return res.data;
+            }
+        } catch (error) {
+            message.error(setting.MESSAGES.DEFAULT);
+        }
+    },
+    CreateFile: async (payload) => {
+        try {
+            let res = await apiPostAuth(config.CREATE_FILE, payload);
+
+            const { status } = res;
+            if (status === 200) {
+                message.success(res.message);
+                return res.data;
+            }
+        } catch (error) {
+            message.error(setting.MESSAGES.DEFAULT);
+        }
+    },
+    UploadFormData: async (type, payload) => {
+        try {
+            let res = await apiPostAuth(`${config.UPLOAD}/${type}`, payload, {
+                "Content-Type": "multipart/form-data",
+            });
 
             const { status } = res;
             if (status === 200) {

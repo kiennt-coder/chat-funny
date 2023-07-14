@@ -63,3 +63,35 @@ Use mongoose.model(name, schema)
 13-07-2023	00:47:25-----/v1/rooms?---GET---undefined---Cannot read properties of undefined (reading 'includes')
 13-07-2023	00:51:06-----/v1/rooms?type=true---GET---undefined---query is not defined
 13-07-2023	00:55:13-----/v1/rooms?type=true&users=6480ab1ed065370c33f9750---GET---undefined---Cast to ObjectId failed for value "6480ab1ed065370c33f9750" (type string) at path "users" for model "Room"
+13-07-2023	23:24:09-----/uploads/d51f3b8125eb83295fe90ecfa8ec718c---GET---404---This route is not exists!
+13-07-2023	23:24:12-----/favicon.ico---GET---404---This route is not exists!
+13-07-2023	23:25:43-----/upload/images/d51f3b8125eb83295fe90ecfa8ec718c---GET---404---This route is not exists!
+13-07-2023	23:25:48-----/d51f3b8125eb83295fe90ecfa8ec718c---GET---404---This route is not exists!
+13-07-2023	23:28:55-----/uploads---GET---404---This route is not exists!
+13-07-2023	23:29:08-----/uploads---GET---404---This route is not exists!
+13-07-2023	23:29:13-----/uploads/adf---GET---404---This route is not exists!
+13-07-2023	23:33:26-----/public/---GET---404---This route is not exists!
+13-07-2023	23:33:34-----/public/uploads/images/adf---GET---404---This route is not exists!
+13-07-2023	23:33:57-----/public/---GET---404---This route is not exists!
+13-07-2023	23:34:09-----/v1/public/---GET---404---This route is not exists!
+13-07-2023	23:34:14-----/public/---GET---404---This route is not exists!
+13-07-2023	23:35:32-----/public/---GET---404---This route is not exists!
+13-07-2023	23:36:04-----/uploads/---GET---404---This route is not exists!
+13-07-2023	23:36:10-----/uploads/images/af---GET---404---This route is not exists!
+13-07-2023	23:36:12-----/uploads/images/af---GET---404---This route is not exists!
+13-07-2023	23:37:28-----/uploads/images/af---GET---404---This route is not exists!
+13-07-2023	23:37:30-----/uploads/images/af---GET---404---This route is not exists!
+13-07-2023	23:37:34-----/uploads/---GET---404---This route is not exists!
+13-07-2023	23:37:38-----/uploads/---GET---404---This route is not exists!
+13-07-2023	23:38:42-----/uploads/---GET---404---This route is not exists!
+13-07-2023	23:38:44-----/uploads/---GET---404---This route is not exists!
+13-07-2023	23:40:37-----/uploads/---GET---404---This route is not exists!
+13-07-2023	23:40:41-----/public/---GET---404---This route is not exists!
+13-07-2023	23:40:45-----/public/---GET---404---This route is not exists!
+13-07-2023	23:45:20-----/public/uploads/images/11ba6bf346e3e71f6c635312b2a9f472---GET---404---This route is not exists!
+13-07-2023	23:45:23-----/public/uploads/images/11ba6bf346e3e71f6c635312b2a9f472---GET---404---This route is not exists!
+14-07-2023	00:05:45-----/v1/upload/images---POST---401---Unauthorized
+14-07-2023	00:16:30-----/v1/upload/images---POST---undefined---Chỉ nhận ảnh (image/png, image/jpeg, image/jpg, image/webp)
+14-07-2023	00:18:32-----/v1/upload/images---POST---undefined---Chỉ nhận ảnh (image/png, image/jpeg, image/jpg, image/webp)
+14-07-2023	00:33:49-----/v1/upload/files---POST---undefined---Chỉ nhận ảnh (application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, application/pdf)
+14-07-2023	01:02:47-----/v1/upload/files---POST---undefined---File too large

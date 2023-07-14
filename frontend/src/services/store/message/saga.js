@@ -24,12 +24,35 @@ function* getListMessage({ payload }) {
 }
 
 function* createMessageSaga({ payload }) {
+    let { files, images, ...rest } = payload;
+    let newPayload = { ...rest, files: [] };
     try {
-        const res = yield call(chatConfig.CreateMessage, payload);
+        const res = yield call(chatConfig.CreateMessage, newPayload);
         if (!res) yield put(createMessageRejected());
         else {
-            socket.emit("sendMessage", res.savedMessage);
-            yield put(createMessageFulfilled(res));
+            let [file] = files;
+            const resFile = yield call(chatConfig.CreateFile, {
+                messageId: res.savedMessage._id,
+                name: file.originalname,
+                url: file.path,
+            });
+
+            if (!resFile) yield put(createMessageRejected());
+            else {
+                socket.emit("sendMessage", {
+                    ...res.savedMessage,
+                    files,
+                    images,
+                });
+                yield put(
+                    createMessageFulfilled({
+                        savedMessage: {
+                            ...res.savedMessage,
+                            files: [resFile.savedFile],
+                        },
+                    })
+                );
+            }
         }
     } catch (error) {
         yield put(createMessageRejected());

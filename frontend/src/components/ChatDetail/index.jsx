@@ -12,7 +12,7 @@ import { Suspense, createRef, memo, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import LoadingComponent from "../LoadingComponent"
 import { Avatar, Form, FormItem, Input, Tooltip } from "../uiElements"
-import {Form as FormAnt, Popover} from "antd"
+import {Form as FormAnt, Popover, Upload, message} from "antd"
 import {
     SmileOutlined,
     PaperClipOutlined,
@@ -30,6 +30,7 @@ import dayjs from "dayjs"
 import EmojiPicker from "emoji-picker-react"
 import { socket } from "../../services/socket"
 import setting from "../../configs/setting"
+import config from "../../pages/chats/config"
 
 const ChatDetail = ({...props}) => {
     const dispatch = useDispatch()
@@ -38,10 +39,40 @@ const ChatDetail = ({...props}) => {
         room: {rooms, activeRoom},
         message: {messages}
     } = useSelector(state => state)
+    const {FILE_TYPES, IMAGE_TYPES, ERR_SEND_MESSAGE} = setting
+
     const emojiPickerRef = createRef()
     const [form] = FormAnt.useForm()
     const [roomDetail, setRoomDetail] = useState()
     const [lastMessageEl, setLasMessageEl] = useState()
+
+    const uploadFileProps = {
+        name: "files",
+        maxCount: 5,
+        multiple: true,
+        accept: FILE_TYPES.join(", "),
+        beforeUpload: (file, fileList) => {
+            const isType = FILE_TYPES.includes(file.type);
+            if (!isType) {
+                message.error(`Chỉ nhận tệp word, excel, powerpoint, pdf.`);
+            }
+            return false
+        },
+    }
+
+    const uploadImageProps = {
+        name: "images",
+        maxCount: 10,
+        multiple: true,
+        accept: IMAGE_TYPES.join(", "),
+        beforeUpload: (file, fileList) => {
+            const isType = IMAGE_TYPES.includes(file.type);
+            if (!isType) {
+                message.error(`Chỉ nhận tệp ${IMAGE_TYPES.join(", ")}.`)
+            }
+            return false
+        }
+    }
 
     useEffect(() => {
         let user = JSON.parse(localStorage.getItem(setting.LOCAL_STORAGE.USER))
@@ -107,14 +138,22 @@ const ChatDetail = ({...props}) => {
             </Popover>),
         },
         {
-            name: "file",
+            name: "files",
             title: "File đính kèm",
-            icon: <PaperClipOutlined />,
+            icon: (
+                <Upload {...uploadFileProps}>
+                    <PaperClipOutlined />
+                </Upload>
+            ),
         },
         {
-            name: "image",
+            name: "images",
             title: "Hình ảnh",
-            icon: <PictureOutlined />,
+            icon: (
+                <Upload {...uploadImageProps}>
+                    <PictureOutlined />
+                </Upload>
+            ),
         },
     ]
 
@@ -128,11 +167,11 @@ const ChatDetail = ({...props}) => {
 
     const renderFormItemIcons = listIcon => {
         return listIcon.map((item, index) => (
-            <FormItem name={item.name} key={index} className="form__action--icon">
-                <Tooltip title={item.title}>
+            <Tooltip key={index} title={item.title}>
+                <FormItem name={item.name} className="form__action--icon">
                     {item.icon}
-                </Tooltip>
-            </FormItem>
+                </FormItem>
+            </Tooltip>
         ))
     }
 
@@ -146,6 +185,7 @@ const ChatDetail = ({...props}) => {
                     id: item._id,
                     avatar: (list[index+1]?.userSendId === item.userSendId ? "" : "avatar"),
                     text: item.text,
+                    files: item.files,
                     username: (list[index+1]?.userSendId === item.userSendId ? "" : userInfo?.nickname),
                     time: dayjs(item.createdAt).format("HH:mm")
                 }}
@@ -154,20 +194,55 @@ const ChatDetail = ({...props}) => {
         )
     })
 
-    const handleSubmit = (values) => {
+    const handleUpload = async (type, fileList) => {
+        return await config.UploadFormData(type, fileList)
+    }
 
-        let room = rooms.find(room => room._id === activeRoom)
+    const handleSubmit = async (values) => {
+        const {files, images} = values
+        const formFiles = new FormData()
+        const formImages = new FormData()
+        let uploadFiles = null
+        let uploadImages = null
 
-        let data = {
-            roomId: room._id,
-            userSendId: user._id,
-            userReveiceId: room.users.find(item => item._id !== user._id)._id,
-            text: values.text,
-            files: [],
-            isSeen: [user._id],
+        try {
+            if(files && files?.fileList?.length) {
+                files.fileList.forEach(item => {
+                    formFiles.append("files", item.originFileObj)
+                })
+                
+                uploadFiles = await handleUpload("files", formFiles)
+            }
+
+            if(images && images?.fileList?.length) {
+                images.fileList.forEach(item => {
+                    formImages.append("images", item.originFileObj)
+                })
+                
+                uploadImages = await handleUpload("images", formImages)
+            }
+            
+            console.log({
+                uploadFiles,
+                uploadImages
+            })
+
+            let room = rooms.find(room => room._id === activeRoom)
+
+            let data = {
+                roomId: room._id,
+                userSendId: user._id,
+                userReveiceId: room.users.find(item => item._id !== user._id)._id,
+                text: values.text,
+                files: uploadFiles ? [...uploadFiles] : [] ,
+                images: uploadImages ? [...uploadImages] : [],
+                isSeen: [user._id],
+            }
+
+            dispatch(createMessage(data))
+        } catch (error) {
+            message.error(ERR_SEND_MESSAGE)
         }
-
-        dispatch(createMessage(data))
 
         form.resetFields()
     }

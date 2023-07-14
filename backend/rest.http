@@ -63,6 +63,7 @@ Content-Type: application/json
 ### Create
 
 POST http://localhost:3001/v1/rooms
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODkxODI5MDUsImV4cCI6MTY4OTE4NDcwNX0.FW_eTn8y9JWYLyUn1Bk0yJJ90gYfoTf0Q4OhHofONOY
 Content-Type: application/json
 
 {
@@ -86,8 +87,8 @@ DELETE http://localhost:3001/v1/rooms/647d85c2ed5e7c2ed37673e8
 Content-Type: application/json
 
 ### Get list
-GET http://localhost:3001/v1/rooms
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkODViNGVkNWU3YzJlZDM3NjczZTYiLCJpYXQiOjE2ODYwNjkwNzQsImV4cCI6MTY4NjA2OTM3NH0.M85Q8KrEIEPxyn7Vh_dxtI4iX2pvqScRNoZ_y1_UWKc
+GET http://localhost:3001/v1/rooms?type=true&users=6480ab1ed065370c33f9750c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODkxODI5MDUsImV4cCI6MTY4OTE4NDcwNX0.FW_eTn8y9JWYLyUn1Bk0yJJ90gYfoTf0Q4OhHofONOY
 
 ### Get list message in room
 GET http://localhost:3001/v1/rooms/6480ab72d065370c33f97510/messages
@@ -163,3 +164,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkO
 
 ### Get detail
 GET http://localhost:3001/v1/files/6481ffaf6bde84483c306773
+
+#------------------------- File --------------------------#
+
+### Upload image
+POST http://localhost:3001/v1/upload/images
+Content-Type: multipart/form-data
