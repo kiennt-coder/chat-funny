@@ -40,6 +40,7 @@ const messageValidate = (data) => {
 const fileValidate = (data) => {
     const fileSchema = Joi.object({
         name: Joi.string(),
+        type: Joi.boolean().truthy(1).falsy(0).required(),
         url: Joi.string().required(),
         messageId: Joi.string(),
     });

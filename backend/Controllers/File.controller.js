@@ -6,11 +6,11 @@ module.exports = {
     // Get list
     getList: async (req, res, next) => {
         try {
-            const file = await File.find();
+            const files = await File.find();
 
             return res.json({
                 status: 200,
-                data: { file },
+                data: { files },
                 message: "Lấy danh sách thành công!",
             });
         } catch (error) {

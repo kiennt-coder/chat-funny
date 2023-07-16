@@ -6,12 +6,16 @@ import {
     createMessage,
     createMessageFulfilled,
     createMessageRejected,
+    updateMessage,
+    updateMessageFulfilled,
+    updateMessageRejected,
     deleteMessage,
     deleteMessageFulfilled,
     deleteMessageRejected,
 } from "./slice";
 import chatConfig from "../../../pages/chats/config";
 import { socket } from "../../socket";
+import { createFileRejected } from "../file/slice";
 
 function* getListMessage({ payload }) {
     try {
@@ -27,35 +31,82 @@ function* createMessageSaga({ payload }) {
     let { files, images, ...rest } = payload;
     let newPayload = { ...rest, files: [] };
     try {
-        const res = yield call(chatConfig.CreateMessage, newPayload);
-        if (!res) yield put(createMessageRejected());
+        const resCreatedMessage = yield call(
+            chatConfig.CreateMessage,
+            newPayload
+        );
+        if (!resCreatedMessage) yield put(createMessageRejected());
         else {
-            let [file] = files;
-            const resFile = yield call(chatConfig.CreateFile, {
-                messageId: res.savedMessage._id,
-                name: file.originalname,
-                url: file.path,
-            });
+            let fileIds = [];
+            let resCreatedFile = null;
+            if (files && files.length) {
+                let [file] = files;
+                let dataFile = {
+                    messageId: resCreatedMessage.savedMessage._id,
+                    name: file.originalname,
+                    type: false,
+                    url: file.path,
+                };
+                resCreatedFile = yield call(chatConfig.CreateFile, dataFile);
+                if (!resCreatedFile) yield put(createFileRejected());
+                else fileIds.push(resCreatedFile.savedFile._id);
+            }
 
-            if (!resFile) yield put(createMessageRejected());
+            let resCreatedImage = null;
+            if (images && images.length) {
+                let [image] = images;
+                let dataImage = {
+                    messageId: resCreatedMessage.savedMessage._id,
+                    name: image.originalname,
+                    type: true,
+                    url: image.path,
+                };
+                resCreatedImage = yield call(chatConfig.CreateFile, dataImage);
+                if (!resCreatedImage) yield put(createFileRejected());
+                else fileIds.push(resCreatedImage.savedFile._id);
+            }
+
+            let dataMessage = {
+                id: resCreatedMessage.savedMessage._id,
+                text: resCreatedMessage.savedMessage.text,
+                files: [...resCreatedMessage.savedMessage.files, ...fileIds],
+            };
+            const resUpdatedMesage = yield call(
+                chatConfig.UpdateMessage,
+                dataMessage
+            );
+            if (!resUpdatedMesage) yield put(updateMessageRejected());
             else {
                 socket.emit("sendMessage", {
-                    ...res.savedMessage,
-                    files,
-                    images,
+                    ...resUpdatedMesage.updatedMessage,
+                    files: [resCreatedFile?.savedFile] ?? [],
+                    images: [resCreatedImage?.savedFile] ?? [],
                 });
+
                 yield put(
                     createMessageFulfilled({
                         savedMessage: {
-                            ...res.savedMessage,
-                            files: [resFile.savedFile],
+                            ...resUpdatedMesage.updatedMessage,
+                            files: [resCreatedFile?.savedFile] ?? [],
+                            images: [resCreatedImage?.savedFile] ?? [],
                         },
                     })
                 );
             }
         }
     } catch (error) {
+        console.log("error::", error.message);
         yield put(createMessageRejected());
+    }
+}
+
+function* updateMessageSaga({ payload }) {
+    try {
+        const res = yield call(chatConfig.UpdateMessage, payload);
+        if (!res) yield put(updateMessageRejected());
+        else yield put(updateMessageFulfilled(res));
+    } catch (error) {
+        yield put(updateMessageRejected());
     }
 }
 
@@ -72,5 +123,6 @@ function* deleteMessageSaga({ payload }) {
 export default function* mySaga() {
     yield takeLatest(getList.toString(), getListMessage);
     yield takeLatest(createMessage.toString(), createMessageSaga);
+    yield takeLatest(updateMessage.toString(), updateMessageSaga);
     yield takeLatest(deleteMessage.toString(), deleteMessageSaga);
 }

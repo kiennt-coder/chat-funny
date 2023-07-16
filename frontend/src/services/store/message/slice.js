@@ -37,6 +37,31 @@ export const messageSlice = createSlice({
             ...state,
             loading: false,
         }),
+        // Update Message
+        updateMessage: (state) => ({
+            ...state,
+            loading: true,
+        }),
+        updateMessageFulfilled: (state, { payload }) => ({
+            ...state,
+            messages: state.map((message) => {
+                let newMessage = { ...message };
+                newMessage =
+                    message._id === payload.updatedMessage && newMessage
+                        ? {
+                              ...newMessage,
+                              ...payload.updatedMessage,
+                          }
+                        : { ...newMessage };
+
+                return newMessage;
+            }),
+            loading: false,
+        }),
+        updateMessageRejected: (state) => ({
+            ...state,
+            loading: false,
+        }),
         // Delete Message
         deleteMessage: (state) => ({
             ...state,
@@ -63,6 +88,9 @@ export const {
     createMessage,
     createMessageFulfilled,
     createMessageRejected,
+    updateMessage,
+    updateMessageFulfilled,
+    updateMessageRejected,
     deleteMessage,
     deleteMessageFulfilled,
     deleteMessageRejected,

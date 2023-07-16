@@ -12,6 +12,10 @@ const FileSchema = new Schema(
             type: String,
             required: true,
         },
+        type: {
+            type: Boolean,
+            required: true,
+        },
         messageId: {
             type: Schema.Types.ObjectId,
             ref: "Message",

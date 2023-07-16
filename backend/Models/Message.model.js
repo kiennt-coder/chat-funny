@@ -27,6 +27,12 @@ const MessageSchema = new Schema(
                 ref: "File",
             },
         ],
+        images: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: "File",
+            },
+        ],
         isSeen: [
             {
                 type: Schema.Types.ObjectId,

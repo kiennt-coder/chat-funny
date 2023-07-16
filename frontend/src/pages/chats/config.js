@@ -3,6 +3,7 @@ import setting from "../../configs/setting";
 import {
     apiDeleteAuth,
     apiGetAuth,
+    apiPatchAuth,
     apiPostAuth,
 } from "../../services/api/auth";
 
@@ -10,6 +11,7 @@ const config = {
     // URL
     GET_LIST: `${setting.API_URL}rooms`,
     CREATE_MESSAGE: `${setting.API_URL}messages`,
+    UPDATE_MESSAGE: `${setting.API_URL}messages`,
     DELETE_MESSAGE: `${setting.API_URL}messages`,
     CREATE_FILE: `${setting.API_URL}files`,
     UPLOAD: `${setting.API_URL}upload`,
@@ -46,6 +48,22 @@ const config = {
     CreateMessage: async (payload) => {
         try {
             let res = await apiPostAuth(config.CREATE_MESSAGE, payload);
+
+            const { status } = res;
+            if (status === 200) {
+                message.success(res.message);
+                return res.data;
+            }
+        } catch (error) {
+            message.error(setting.MESSAGES.DEFAULT);
+        }
+    },
+    UpdateMessage: async ({ id, ...payload }) => {
+        try {
+            let res = await apiPatchAuth(
+                `${config.UPDATE_MESSAGE}/${id}`,
+                payload
+            );
 
             const { status } = res;
             if (status === 200) {

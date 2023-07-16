@@ -87,7 +87,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDdkO
 
 ### Get list message in room
 GET https://chat-funny-api.vercel.app/v1/rooms/6480ab72d065370c33f97510/messages
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODgzMTI4MzQsImV4cCI6MTY4ODMxMzEzNH0.w5GqFWKelVeKlM27WsboMgN2E8-EACDCMCxvPDnh1y0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODk1MzM1MDYsImV4cCI6MTY4OTUzNTMwNn0.7bqQP44yDUhL7mOessVlzmvWlCaTMZ9V0UFMA6wXWxA
 
 ### Get detail
 GET https://chat-funny-api.vercel.app/v1/rooms/6480ab72d065370c33f97510

@@ -88,10 +88,11 @@ Content-Type: application/json
 
 ### Get list
 GET http://localhost:3001/v1/rooms?type=true&users=6480ab1ed065370c33f9750c
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODkxODI5MDUsImV4cCI6MTY4OTE4NDcwNX0.FW_eTn8y9JWYLyUn1Bk0yJJ90gYfoTf0Q4OhHofONOY
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODk1MzM1MDYsImV4cCI6MTY4OTUzNTMwNn0.7bqQP44yDUhL7mOessVlzmvWlCaTMZ9V0UFMA6wXWxA
 
 ### Get list message in room
 GET http://localhost:3001/v1/rooms/6480ab72d065370c33f97510/messages
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODk1MzM1MDYsImV4cCI6MTY4OTUzNTMwNn0.7bqQP44yDUhL7mOessVlzmvWlCaTMZ9V0UFMA6wXWxA
 
 ### Get detail
 GET http://localhost:3001/v1/rooms/6480ab72d065370c33f97510

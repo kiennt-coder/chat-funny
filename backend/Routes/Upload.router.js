@@ -16,6 +16,11 @@ route.post(
 );
 
 // Upload file route
-route.post("/files", uploadFile.array("files", 5), uploadFiles);
+route.post(
+    "/files",
+    verifyAccessToken,
+    uploadFile.array("files", 5),
+    uploadFiles
+);
 
 module.exports = route;
