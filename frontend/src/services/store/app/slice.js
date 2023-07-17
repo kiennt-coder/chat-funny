@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     menuItemActive: "",
+    chatDetailActive: false,
     theme: "light",
 };
 
@@ -17,8 +18,13 @@ export const appSlice = createSlice({
             ...state,
             theme: payload,
         }),
+        setChatDetailActive: (state, { payload }) => ({
+            ...state,
+            chatDetailActive: payload,
+        }),
     },
 });
 
-export const { setMenuItemActive, setTheme } = appSlice.actions;
+export const { setMenuItemActive, setTheme, setChatDetailActive } =
+    appSlice.actions;
 export default appSlice.reducer;

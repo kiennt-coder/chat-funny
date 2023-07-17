@@ -9,6 +9,33 @@ import { useDispatch, useSelector } from "react-redux"
 import { login } from "../../services/store/auth/slice"
 import { useEffect } from "react"
 
+const resonsive = {
+    xs: {
+        span: 22,
+        offset: 1
+    },
+    sm: {
+        span: 20,
+        offset: 2
+    },
+    md: {
+        span: 12,
+        offset: 6
+    },
+    lg: {
+        span: 8,
+        offset: 8
+    },
+    xl: {
+        span: 8,
+        offset: 8
+    },
+    xxl: {
+        span: 8,
+        offset: 8
+    }
+}
+
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -25,7 +52,7 @@ const Login = () => {
     return (
         <Container>
                 <Row>
-                    <Col span={8} offset={8}>
+                    <Col {...resonsive}>
                         <LoginWrapper>
                             <Heading className="text-align-center">
                                 Đăng nhập

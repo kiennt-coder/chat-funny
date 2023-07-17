@@ -17,9 +17,11 @@ const config = {
     UPLOAD: `${setting.API_URL}upload`,
 
     // Action
-    GetList: async (payload) => {
+    GetList: async ({ payload }) => {
         try {
-            let res = await apiGetAuth(config.GET_LIST, payload);
+            let res = await apiGetAuth(
+                `${setting.API_URL}users/${payload.userId}/rooms`
+            );
 
             const { status } = res;
             if (status === 200) {

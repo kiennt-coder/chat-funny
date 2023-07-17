@@ -61,7 +61,7 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
                     <div className="detail">
                         <p className="text">
                             {message?.text ? message.text : ""}
-                            {message?.files && (<p>File: {message?.files[0]?.name}</p>)}
+                            {message?.files?.[0]  && (<p>File: {message?.files[0]?.name}</p>)}
                         </p>
 
                         <p className="time">

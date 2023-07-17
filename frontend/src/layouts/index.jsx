@@ -1,7 +1,7 @@
 import { Col, Layout, Row } from "antd";
 import { Outlet } from "react-router-dom";
 import { styledContent, styledSider } from "./styled";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setMenuItemActive } from "../services/store/app/slice"
 import Logo from "./components/Logo";
 import Menu from "./components/Menu";
@@ -14,6 +14,7 @@ const ContentWrapper = styledContent(Content)
 
 const LayoutMain = () => {
     const dispatch = useDispatch()
+    const {chatDetailActive} = useSelector(state => state.app)
 
     const handleChangeMenuItemSelected = (value="0") => {
         dispatch(setMenuItemActive(value))
@@ -22,16 +23,55 @@ const LayoutMain = () => {
     return (
         <Layout>
             <SiderWapper>
-                <Logo onChangeMenuItem={handleChangeMenuItemSelected}/>
+                <Logo className="sider__logo" onChangeMenuItem={handleChangeMenuItemSelected}/>
                 <Menu onChangeMenuItem={handleChangeMenuItemSelected}/>
-                <UserDropdown />
+                <UserDropdown className="sider__user-dropdown" />
             </SiderWapper>
             <ContentWrapper>
-                <Row>
-                    <Col span={8}>
+                <Row className="content__row">
+                    <Col
+                        xs={{
+                            span: 24
+                        }}
+                        sm={{
+                            span: 24
+                        }}
+                        md={{
+                            span: 24
+                        }} 
+                        lg={{
+                            span: 8
+                        }}
+                        xl={{
+                            span: 8
+                        }}
+                        xxl={{
+                            span: 8
+                        }}
+                    >
                         <Outlet />
                     </Col>
-                    <Col span={16}>
+                    <Col
+                         className={`content__chat-box${chatDetailActive ? " content__chat-box--active" : ""}`}
+                        xs={{
+                            span: 24
+                        }}
+                        sm={{
+                            span: 24
+                        }}
+                        md={{
+                            span: 24
+                        }} 
+                        lg={{
+                            span: 16
+                        }}
+                        xl={{
+                            span: 16
+                        }}
+                        xxl={{
+                            span: 16
+                        }}
+                    >
                         <ChatDetail />
                     </Col>
                 </Row>

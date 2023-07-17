@@ -45,7 +45,26 @@ module.exports = {
     // Create
     create: async (req, res, next) => {
         try {
-            //Validate data
+            let isArray = Array.isArray(req.body);
+
+            if (isArray) {
+                let savedFile = await File.insertMany(req.body);
+
+                if (!savedFile) {
+                    throw createError({
+                        message: "Thêm mới thất bại!",
+                        data: savedFile,
+                    });
+                }
+
+                return res.json({
+                    status: 200,
+                    data: { savedFile },
+                    message: "Thêm mới thành công!",
+                });
+            }
+
+            // Validate data
             const { error } = fileValidate(req.body);
 
             if (error) {

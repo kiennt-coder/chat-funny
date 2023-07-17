@@ -7,7 +7,7 @@ import {
 } from '@ant-design/icons';
 import { Tooltip } from "../../../components/uiElements";
 import { memo, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Menu = ({
     mode="inline", 
@@ -15,6 +15,7 @@ const Menu = ({
     onChangeMenuItem=function(){},
      ...props
 }) => {
+    const dispatch = useDispatch()
     const MenuItemActive = useSelector(state => state.app.menuItemActive);
 
     const [menuItemSelected, setMenuItemSelected] = useState(MenuItemActive)

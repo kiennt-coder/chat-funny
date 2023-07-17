@@ -8,13 +8,16 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getList, updateActiveRoom } from "../../services/store/room/slice"
 import { Outlet } from "react-router-dom"
+import { setChatDetailActive } from "../../services/store/app/slice"
 
 const Chats = () => {
     const dispatch = useDispatch()
-    const {rooms, activeRoom} = useSelector(state => state.room)
+    const {room: {rooms, activeRoom}, auth: {user}} = useSelector(state => state)
 
     const handleChangeActiveRoom = (roomId) => {
-        activeRoom !== roomId && dispatch(updateActiveRoom({activeRoom: roomId}))
+        (activeRoom !== roomId) && dispatch(updateActiveRoom({activeRoom: roomId}))
+        
+        dispatch(setChatDetailActive(true))
     }
 
     const renderRooms = (list=[]) => {
@@ -24,7 +27,7 @@ const Chats = () => {
     }
 
     useEffect(() => {
-        !rooms.length && dispatch(getList())
+        !rooms.length && dispatch(getList({userId: user?._id}))
     }, [rooms, dispatch])
 
     return (

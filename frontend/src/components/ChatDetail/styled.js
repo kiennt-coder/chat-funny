@@ -11,6 +11,11 @@ const ChatDetailWrapper = styled.div`
     display: flex;
     flex-direction: column;
     overflow: hidden;
+
+    @media (max-width: 991.98px) {
+        min-height: calc(100vh - ${size("siderWidth")});
+        height: calc(100vh - ${size("siderWidth")});
+    }
 `;
 
 const ChatDetailBox = styled.div`
@@ -74,6 +79,27 @@ export const ChatDetailHeader = styled(ChatDetailBox)`
                 color: ${palette("primary", 3)};
             }
         }
+    }
+
+    @media (max-width: 767.98px) {
+        flex-direction: column;
+        align-items: flex-start;
+
+        & .right {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+`;
+
+export const ChatDetaiBackBtn = styled.div`
+    padding: 1rem;
+    display: none;
+
+    @media (max-width: 991.98px) {
+        display: inline-block;
     }
 `;
 

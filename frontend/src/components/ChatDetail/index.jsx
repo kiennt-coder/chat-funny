@@ -1,6 +1,7 @@
 import
     ChatDetailWrapper,
     {
+        ChatDetaiBackBtn,
         ChatDetailBody,
         ChatDetailFooter,
         ChatDetailHeader,
@@ -22,7 +23,8 @@ import {
     PhoneOutlined,
     VideoCameraOutlined,
     UserOutlined,
-    EllipsisOutlined
+    EllipsisOutlined,
+    LeftOutlined,
 } from "@ant-design/icons"
 import ChatMessage from "../ChatMessage"
 import { createMessage, createMessageFulfilled, getList } from "../../services/store/message/slice"
@@ -31,13 +33,14 @@ import EmojiPicker from "emoji-picker-react"
 import { socket } from "../../services/socket"
 import setting from "../../configs/setting"
 import config from "../../pages/chats/config"
+import { setChatDetailActive } from "../../services/store/app/slice"
 
 const ChatDetail = ({...props}) => {
     const dispatch = useDispatch()
     const {
         auth: {user},
         room: {rooms, activeRoom},
-        message: {messages}
+        message: {messages},
     } = useSelector(state => state)
     const {FILE_TYPES, IMAGE_TYPES, ERR_SEND_MESSAGE} = setting
 
@@ -252,11 +255,18 @@ const ChatDetail = ({...props}) => {
         form.setFieldValue("text", oldText + emojiData.emoji)
     }
 
+    function handleBackChatDetail() {
+        dispatch(setChatDetailActive(false))
+    }
+
     return (
         <Suspense fallback={<LoadingComponent />}>
             <ChatDetailWrapper {...props}>
                 <ChatDetailHeader>
                     <div className="left">
+                        <ChatDetaiBackBtn onClick={handleBackChatDetail}>
+                            <LeftOutlined />
+                        </ChatDetaiBackBtn>
                         <Avatar>
                             {
                                 roomDetail && roomDetail.type ?

@@ -2,12 +2,24 @@ const multer = require("multer");
 const path = require("path");
 
 // Config multer
-const storage = multer.diskStorage({
+const storageImage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "public/uploads/images");
     },
     filename: function (req, file, cb) {
-        let name = `kiennt-${file.fieldname}-${Date.now()}-${Math.round(
+        let name = `kiennt-image-${file.fieldname}-${Date.now()}-${Math.round(
+            Math.random() * 1e9
+        )}${path.extname(file.originalname)}`;
+        cb(null, name);
+    },
+});
+
+const storageFile = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, "public/uploads/files");
+    },
+    filename: function (req, file, cb) {
+        let name = `kiennt-file-${file.fieldname}-${Date.now()}-${Math.round(
             Math.random() * 1e9
         )}${path.extname(file.originalname)}`;
         cb(null, name);
@@ -45,14 +57,14 @@ const fileFilter = function (req, file, cb) {
 };
 
 const uploadImg = multer({
-    storage: storage,
+    storage: storageImage,
     fileFilter: imageFilter,
     limits: {
         fileSize: maxSize,
     },
 });
 const uploadFile = multer({
-    storage: storage,
+    storage: storageFile,
     fileFilter: fileFilter,
     limits: {
         fileSize: maxSize,

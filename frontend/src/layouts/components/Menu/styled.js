@@ -39,6 +39,14 @@ const MenuSiderWrapper = styled(MenuWrapper)`
             }
         }
     }
+
+    @media (max-width: 991.98px) {
+        display: flex;
+        flex-direction: row;
+        max-height: 100% !important;
+        align-items: center;
+        justify-content: space-between;
+    }
 `;
 
 export default MenuSiderWrapper;
