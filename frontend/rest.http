@@ -36,12 +36,11 @@ Content-Type: application/json
 ### Update
 
 PATCH https://chat-funny-api.vercel.app/v1/users/64ad7ed3fd66df6139d7c903
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NGFkN2VkM2ZkNjZkZjYxMzlkN2M5MDMiLCJpYXQiOjE2ODkwOTE4MDIsImV4cCI6MTY4OTA5MzYwMn0.XyzXjybMPSrhwolEGUnnDaV6dsyVcfmDoCp5gFDqqPI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDgwYWIxZWQwNjUzNzBjMzNmOTc1MGMiLCJpYXQiOjE2ODk2OTU1MTMsImV4cCI6MTY4OTY5NzMxM30.50zo0JoRJIPDU1avQ2S4oJuZdNO2L5RJgNjtTZh1sBs
 Content-Type: application/json
 
 {
-    "rooms": ["6480ab72d065370c33f97510"],
-    "nickname": "Lộc Sơn"
+    "rooms": ["6480ab72d065370c33f97510", "64b57335b25dad85d575d390"]
 }
 
 ### Logout

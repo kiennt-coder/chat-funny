@@ -20,7 +20,7 @@ export const styledSider = (componentName) => styled(componentName)`
         min-width: 100% !important;
         width: 100% !important;
         height: ${size("siderWidth")};
-        position: absolute !important;
+        position: fixed !important;
         right: 0;
         bottom: 0;
         left: 0;

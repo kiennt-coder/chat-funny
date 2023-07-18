@@ -100,3 +100,17 @@ Use mongoose.model(name, schema)
 17-07-2023	23:01:00-----/public/uploads/images/kiennt-files-1689533711418-103617784.xlsx---GET---404---This route is not exists!
 17-07-2023	23:07:48-----/v1/files---POST---401---Unauthorized
 17-07-2023	23:47:29-----/v1/rooms/64aee501b1d621e4d5e74afc---PATCH---500---Xác thực thất bại!
+18-07-2023	23:17:33-----/v1/upload/images---POST---401---Unauthorized
+18-07-2023	23:23:59-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:25:02-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:25:21-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:25:29-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:29:11-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:33:05-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:34:54-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:35:14-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:36:17-----/v1/upload/files---POST---undefined---Chỉ nhận ảnh (application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation, application/pdf)
+18-07-2023	23:38:05-----/v1/upload/images---POST---401---jwt expired
+18-07-2023	23:38:40-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:40:45-----/v1/upload/images---POST---undefined---Unexpected field
+18-07-2023	23:41:59-----/v1/upload/images---POST---undefined---Chỉ nhận ảnh (image/png, image/jpeg, image/jpg, image/webp)

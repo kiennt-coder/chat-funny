@@ -6,12 +6,15 @@ module.exports = {
         try {
             let { files } = req;
 
+            console.log("files::", files);
+
             return res.json({
                 status: 200,
                 data: files,
                 message: "Thêm ảnh thành công!",
             });
         } catch (error) {
+            console.log("error::", error.message);
             next(error);
         }
     },
