@@ -36,10 +36,17 @@ module.exports = {
         try {
             const { id } = req.params;
 
-            const messages = await Message.find({ roomId: id }).populate(
-                "files",
-                "name url type url"
-            );
+            const messages = await Message.find({ roomId: id })
+                .populate({
+                    path: "files",
+                    match: { type: false },
+                    select: "name url type url size",
+                })
+                .populate({
+                    path: "images",
+                    match: { type: true },
+                    select: "name url type url size",
+                });
 
             if (!messages) {
                 throw createError({

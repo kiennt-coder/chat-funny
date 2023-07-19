@@ -1,6 +1,6 @@
 import { Avatar } from "../uiElements"
-import { MoreOutlined, ClockCircleOutlined } from "@ant-design/icons"
-import ChatMessageWrapper, { ChatMessageAvatar, ChatMessageContent } from "./styled"
+import { MoreOutlined, ClockCircleOutlined, FileOutlined, DownloadOutlined, EllipsisOutlined } from "@ant-design/icons"
+import ChatMessageWrapper, { ChatMessageAvatar, ChatMessageContent, ChatMessageFile, ChatMessageFileWrapper, ChatMessageImage, ChatMessageImageWrapper } from "./styled"
 import { forwardRef } from "react"
 import MenuContext from "../MenuContext"
 import setting from "../../configs/setting"
@@ -35,7 +35,48 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
         }
     }
 
-    console.log("message::", {message})
+    const renderFiles = (files) => {
+        return (
+            <ChatMessageFileWrapper>
+                {files.map(file => (
+                    <ChatMessageFile>
+                        <div className="file__icon">
+                            <FileOutlined />
+                        </div>
+                        <div className="file__content">
+                            <p className="file__name">{file?.name}</p>
+                            <p className="file__size">
+                                {file?.size ? (file.size / 1000000).toFixed(2) : "00.0"} MB
+                            </p>
+                        </div>
+                        <div className="file__action">
+                            <a rel="noopener" target="_blank" href={`${setting.API_DOWNLOAD_URL}${file?.url}`}>
+                                <DownloadOutlined />
+                            </a>
+                            <EllipsisOutlined />
+                        </div>
+                    </ChatMessageFile>
+                ))}
+            </ChatMessageFileWrapper>
+        )
+    }
+
+    const renderImages = (images) => {
+        return (
+            <ChatMessageImageWrapper>
+                {images.map(image => (
+                    <ChatMessageImage style={{backgroundImage: `url('${`${setting.API_DOWNLOAD_URL}${image?.url}`}')`}}>
+                        <div className="image__action">
+                            <a rel="noopener" target="_blank" href={`${setting.API_DOWNLOAD_URL}${image?.url}`}>
+                                <DownloadOutlined />
+                            </a>
+                            <EllipsisOutlined />
+                        </div>
+                    </ChatMessageImage>
+                ))}
+            </ChatMessageImageWrapper>
+        )
+    }
 
     return (
         <ChatMessageWrapper {...props} align={align} ref={ref}>
@@ -61,7 +102,8 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
                     <div className="detail">
                         <p className="text">
                             {message?.text ? message.text : ""}
-                            {message?.files?.[0]  && (<p>File: {message?.files[0]?.name}</p>)}
+                            {message?.files?.length && renderFiles(message.files)}
+                            {message?.images?.length && renderImages(message.images)}
                         </p>
 
                         <p className="time">

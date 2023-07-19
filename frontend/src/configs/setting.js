@@ -1,6 +1,7 @@
 export default Object.freeze({
     APP_NAME: "Funny Chat",
     API_URL: "https://funny-chat-api-f5dba63047ca.herokuapp.com/v1/",
+    API_DOWNLOAD_URL: "https://funny-chat-api-f5dba63047ca.herokuapp.com/",
     SOCKET_URL: "https://funny-chat-api-f5dba63047ca.herokuapp.com",
     AUTHOR: "Kiennt",
     SITE_KEY: "6LfBPtsmAAAAAD1xtkSHLgSGrihge1EJyYPPFLIf",

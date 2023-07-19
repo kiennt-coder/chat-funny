@@ -193,7 +193,7 @@ module.exports = {
 
             const rooms = await Room.find({
                 users: "6480ab1ed065370c33f9750c",
-            });
+            }).populate("users", "nickname");
 
             if (!rooms)
                 throw createError({

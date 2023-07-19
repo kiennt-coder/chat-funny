@@ -31,6 +31,7 @@ const messageValidate = (data) => {
         userReveiceId: Joi.string(),
         text: Joi.string().required(),
         files: Joi.array().unique().items(Joi.string()),
+        images: Joi.array().unique().items(Joi.string()),
         isSeen: Joi.array().unique().items(Joi.string()),
     });
 
@@ -42,6 +43,7 @@ const fileValidate = (data) => {
         name: Joi.string(),
         type: Joi.boolean().truthy(1).falsy(0).required(),
         url: Joi.string().required(),
+        size: Joi.number().required(),
         messageId: Joi.string(),
     });
 

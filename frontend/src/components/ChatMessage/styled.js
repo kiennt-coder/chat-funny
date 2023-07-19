@@ -128,4 +128,79 @@ export const ChatMessageContent = styled.div`
     }
 `;
 
+export const ChatMessageFileWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+`;
+
+export const ChatMessageFile = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    color: ${palette("primary", 1)};
+    padding: ${size("padding-2")};
+    border-radius: ${size("radius")};
+    background-color: ${palette("primary", 3)};
+
+    & .file__icon {
+        padding: 0.75rem ${size("padding-3")};
+        border-radius: ${size("radius-medium")};
+        background-color: ${palette("secondary", 3)};
+
+        & svg {
+            fill: ${palette("color", 2)};
+            font-size: ${size("text-medium")};
+        }
+    }
+
+    & .file__content {
+        & .file__name {
+            font-size: ${size("text")};
+        }
+
+        & .file__size {
+            font-size: ${size("text")};
+            color: ${palette("secondary", 7)};
+        }
+    }
+
+    & .file__action {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        & .anticon {
+            cursor: pointer;
+            svg {
+                font-size: 1.5rem;
+                color: ${palette("secondary", 1)};
+            }
+        }
+    }
+`;
+
+export const ChatMessageImageWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1rem;
+    margin-top: ${size("margin-2")};
+`;
+
+export const ChatMessageImage = styled.div`
+    width: 9.375rem;
+    height: 6.25rem;
+    border-radius: ${size("border")};
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+`;
+
 export default ChatMessageWrapper;

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const { testConnection } = require("../helpers/connections_multi_mongodb");
+const { number } = require("joi");
 
 // Create a new User schema
 const FileSchema = new Schema(
@@ -14,6 +15,10 @@ const FileSchema = new Schema(
         },
         type: {
             type: Boolean,
+            required: true,
+        },
+        size: {
+            type: Number,
             required: true,
         },
         messageId: {

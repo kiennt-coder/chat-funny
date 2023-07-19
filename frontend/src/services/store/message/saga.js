@@ -45,6 +45,7 @@ function* createMessageSaga({ payload }) {
                     messageId: resCreatedMessage.savedMessage._id,
                     name: file.originalname,
                     type: false,
+                    size: file.size,
                     url: file.path,
                 };
                 resCreatedFile = yield call(chatConfig.CreateFile, dataFile);
@@ -52,6 +53,7 @@ function* createMessageSaga({ payload }) {
                 else fileIds.push(resCreatedFile.savedFile._id);
             }
 
+            let imageIds = [];
             let resCreatedImage = null;
             if (images && images.length) {
                 let [image] = images;
@@ -59,17 +61,19 @@ function* createMessageSaga({ payload }) {
                     messageId: resCreatedMessage.savedMessage._id,
                     name: image.originalname,
                     type: true,
+                    size: image.size,
                     url: image.path,
                 };
                 resCreatedImage = yield call(chatConfig.CreateFile, dataImage);
                 if (!resCreatedImage) yield put(createFileRejected());
-                else fileIds.push(resCreatedImage.savedFile._id);
+                else imageIds.push(resCreatedImage.savedFile._id);
             }
 
             let dataMessage = {
                 id: resCreatedMessage.savedMessage._id,
                 text: resCreatedMessage.savedMessage.text,
                 files: [...resCreatedMessage.savedMessage.files, ...fileIds],
+                images: [...resCreatedMessage.savedMessage.images, ...imageIds],
             };
             const resUpdatedMesage = yield call(
                 chatConfig.UpdateMessage,
@@ -87,8 +91,14 @@ function* createMessageSaga({ payload }) {
                     createMessageFulfilled({
                         savedMessage: {
                             ...resUpdatedMesage.updatedMessage,
-                            files: [resCreatedFile?.savedFile] ?? [],
-                            images: [resCreatedImage?.savedFile] ?? [],
+                            files: [
+                                ...resCreatedMessage.savedMessage.files,
+                                resCreatedFile?.savedFile,
+                            ] ?? [...resCreatedMessage.savedMessage.files],
+                            images: [
+                                ...resCreatedMessage.savedMessage.images,
+                                resCreatedImage?.savedFile,
+                            ] ?? [...resCreatedMessage.savedMessage.files],
                         },
                     })
                 );

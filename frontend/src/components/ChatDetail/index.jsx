@@ -188,7 +188,8 @@ const ChatDetail = ({...props}) => {
                     id: item._id,
                     avatar: (list[index+1]?.userSendId === item.userSendId ? "" : "avatar"),
                     text: item.text,
-                    files: item.files,
+                    files: item.files.filter(file => file !== null),
+                    images: item.images.filter(image => image !== null),
                     username: (list[index+1]?.userSendId === item.userSendId ? "" : userInfo?.nickname),
                     time: dayjs(item.createdAt).format("HH:mm")
                 }}
