@@ -40,33 +40,37 @@ function* createMessageSaga({ payload }) {
             let fileIds = [];
             let resCreatedFile = null;
             if (files && files.length) {
-                let [file] = files;
-                let dataFile = {
+                let dataFiles = files.map((file) => ({
                     messageId: resCreatedMessage.savedMessage._id,
                     name: file.originalname,
                     type: false,
                     size: file.size,
                     url: file.path,
-                };
-                resCreatedFile = yield call(chatConfig.CreateFile, dataFile);
+                }));
+                resCreatedFile = yield call(chatConfig.CreateFile, dataFiles);
                 if (!resCreatedFile) yield put(createFileRejected());
-                else fileIds.push(resCreatedFile.savedFile._id);
+                else
+                    fileIds.concat(
+                        resCreatedFile.savedFile.map((file) => file._id)
+                    );
             }
 
             let imageIds = [];
             let resCreatedImage = null;
             if (images && images.length) {
-                let [image] = images;
-                let dataImage = {
+                let dataImages = images.map((image) => ({
                     messageId: resCreatedMessage.savedMessage._id,
                     name: image.originalname,
                     type: true,
                     size: image.size,
                     url: image.path,
-                };
-                resCreatedImage = yield call(chatConfig.CreateFile, dataImage);
+                }));
+                resCreatedImage = yield call(chatConfig.CreateFile, dataImages);
                 if (!resCreatedImage) yield put(createFileRejected());
-                else imageIds.push(resCreatedImage.savedFile._id);
+                else
+                    imageIds.concat(
+                        resCreatedImage.savedFile.map((file) => file._id)
+                    );
             }
 
             let dataMessage = {
@@ -83,22 +87,36 @@ function* createMessageSaga({ payload }) {
             else {
                 socket.emit("sendMessage", {
                     ...resUpdatedMesage.updatedMessage,
-                    files: [resCreatedFile?.savedFile] ?? [],
-                    images: [resCreatedImage?.savedFile] ?? [],
+                    files: resCreatedFile?.savedFile
+                        ? [
+                              ...resCreatedMessage.savedMessage.files,
+                              ...resCreatedFile?.savedFile,
+                          ]
+                        : [...resCreatedMessage.savedMessage.files],
+                    images: resCreatedImage?.savedFile
+                        ? [
+                              ...resCreatedMessage.savedMessage.images,
+                              ...resCreatedImage?.savedFile,
+                          ]
+                        : [...resCreatedMessage.savedMessage.images],
                 });
 
                 yield put(
                     createMessageFulfilled({
                         savedMessage: {
                             ...resUpdatedMesage.updatedMessage,
-                            files: [
-                                ...resCreatedMessage.savedMessage.files,
-                                resCreatedFile?.savedFile,
-                            ] ?? [...resCreatedMessage.savedMessage.files],
-                            images: [
-                                ...resCreatedMessage.savedMessage.images,
-                                resCreatedImage?.savedFile,
-                            ] ?? [...resCreatedMessage.savedMessage.files],
+                            files: resCreatedFile?.savedFile
+                                ? [
+                                      ...resCreatedMessage.savedMessage.files,
+                                      ...resCreatedFile?.savedFile,
+                                  ]
+                                : [...resCreatedMessage.savedMessage.files],
+                            images: resCreatedImage?.savedFile
+                                ? [
+                                      ...resCreatedMessage.savedMessage.images,
+                                      ...resCreatedImage?.savedFile,
+                                  ]
+                                : [...resCreatedMessage.savedMessage.images],
                         },
                     })
                 );

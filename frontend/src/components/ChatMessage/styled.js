@@ -196,11 +196,62 @@ export const ChatMessageImageWrapper = styled.div`
 export const ChatMessageImage = styled.div`
     width: 9.375rem;
     height: 6.25rem;
-    border-radius: ${size("border")};
+    border-radius: ${size("radius")};
     overflow: hidden;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    position: relative;
+
+    & .image__overlay {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: ${palette("rgba", 1)};
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+    }
+
+    & .image__action {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.4s ease-in-out;
+
+        & .anticon {
+            cursor: pointer;
+        }
+
+        & svg {
+            font-size: ${size("iconSiderWidth")};
+            color: ${palette("color", 0)};
+        }
+    }
+
+    &:hover {
+        & .image__overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        & .image__action {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
 `;
 
 export default ChatMessageWrapper;

@@ -72,6 +72,7 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
                             </a>
                             <EllipsisOutlined />
                         </div>
+                        <div className="image__overlay"></div>
                     </ChatMessageImage>
                 ))}
             </ChatMessageImageWrapper>
@@ -102,8 +103,8 @@ const ChatMessage = forwardRef(({message, align="left", ...props}, ref) => {
                     <div className="detail">
                         <p className="text">
                             {message?.text ? message.text : ""}
-                            {message?.files?.length && renderFiles(message.files)}
-                            {message?.images?.length && renderImages(message.images)}
+                            {message?.files?.length ? renderFiles(message.files) : ""}
+                            {message?.images?.length ? renderImages(message.images) : ""}
                         </p>
 
                         <p className="time">

@@ -40,7 +40,7 @@ const ChatDetail = ({...props}) => {
     const {
         auth: {user},
         room: {rooms, activeRoom},
-        message: {messages},
+        message: {messages, loading},
     } = useSelector(state => state)
     const {FILE_TYPES, IMAGE_TYPES, ERR_SEND_MESSAGE} = setting
 
@@ -317,6 +317,7 @@ const ChatDetail = ({...props}) => {
                                     type="primary"
                                     htmlType="submit"
                                     icon={<SendOutlined />}
+                                    loading={loading}
                                 ></ChatDetailSendBtn>
                             </Tooltip>
                         </FormItem>

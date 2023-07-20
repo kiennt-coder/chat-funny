@@ -47,6 +47,7 @@ export default Object.freeze({
         ],
         rgba: [
             "rgba(15,34,58,.12)", // 0. Box Shadow
+            "rgba(15,34,58,.6)", // 1. Overlay
         ],
         bgColor: [
             "#f7f7ff", // 0. Ghost White
